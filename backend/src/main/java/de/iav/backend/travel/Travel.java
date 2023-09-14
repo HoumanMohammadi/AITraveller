@@ -1,5 +1,6 @@
 package de.iav.backend.travel;
 
+import de.iav.backend.travelSuggestion.QuestionerAnswers;
 import de.iav.backend.travelSuggestion.TravelSuggestion;
 import de.iav.backend.user.User;
 import lombok.AllArgsConstructor;
@@ -20,19 +21,9 @@ public class Travel {
     @DBRef
     User user;
     LocalDateTime localDateTime;
-    int age;
-    List<String> coTraveller;
-    String livingCity;
-    boolean disability;
-    int travelDuration;
-    List<String> activity;
-    String season;
-    List<String> meansOfTravel;
-    List<String> travelPurpose;
-    List<String> destinationContinent;
+    QuestionerAnswers questionerAnswers;
 
     public Travel withId(String newId) {
-        return new Travel(newId, this.travelSuggestion, this.user, this.localDateTime, this.age, this.coTraveller, this.livingCity, this.disability,
-                this.travelDuration, this.activity, this.season, this.meansOfTravel, this.travelPurpose, this.destinationContinent);
+        return new Travel(newId, this.travelSuggestion, this.user, this.localDateTime, this.questionerAnswers);
     }
 }
