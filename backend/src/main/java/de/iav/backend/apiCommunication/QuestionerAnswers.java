@@ -1,4 +1,4 @@
-package de.iav.backend.travelSuggestion;
+package de.iav.backend.apiCommunication;
 
 import java.util.List;
 

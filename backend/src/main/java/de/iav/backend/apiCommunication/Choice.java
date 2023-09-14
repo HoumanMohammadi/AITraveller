@@ -1,4 +1,4 @@
-package de.iav.backend.travelSuggestion;
+package de.iav.backend.apiCommunication;
 
 public class Choice {
     int index;

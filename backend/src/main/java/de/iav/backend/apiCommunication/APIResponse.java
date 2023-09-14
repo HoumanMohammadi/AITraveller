@@ -1,14 +1,14 @@
-package de.iav.backend.travelSuggestion;
+package de.iav.backend.apiCommunication;
 
 import java.util.List;
 
-public class TravelSuggestion {
+public class APIResponse {
 
     String id;
     String model;
     List<Choice> choices;
 
-    public TravelSuggestion(String id, String model, List<Choice> choices) {
+    public APIResponse(String id, String model, List<Choice> choices) {
         this.id = id;
         this.model = model;
         this.choices = choices;
