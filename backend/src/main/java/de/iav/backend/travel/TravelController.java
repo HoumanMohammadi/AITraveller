@@ -11,12 +11,9 @@ import java.util.Optional;
 public class TravelController {
 
     private final TravelService travelService;
-    @Autowired
-    private final ChatGPTClient chatGPTClient;
 
-    public TravelController(TravelService travelService, ChatGPTClient chatGPTClient) {
+    public TravelController(TravelService travelService) {
         this.travelService = travelService;
-        this.chatGPTClient = chatGPTClient;
     }
 
     @GetMapping("/{id}")

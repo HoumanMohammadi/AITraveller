@@ -10,11 +10,11 @@ import java.util.Optional;
 public interface TravelRepository extends MongoRepository<Travel, String> {
 
 
-    default Optional<Travel> findTravelByUser(Optional<User> user){
-        return findById(user.get().getId());
-    };
+    default Optional<Travel> findTravelByUser(Optional<User> user) {
+        return user.flatMap(u -> findById(u.getId()));
+    }
 
     default void deleteTravel(Optional<Travel> travel){
-        findById(travel.get().id);
+        travel.ifPresent(t -> findById(t.id));
     }
 }
