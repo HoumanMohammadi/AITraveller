@@ -1,5 +1,7 @@
 package de.iav.backend.travel;
 
+import de.iav.backend.gptApiCommunication.ChatGPTClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -9,9 +11,12 @@ import java.util.Optional;
 public class TravelController {
 
     private final TravelService travelService;
+    @Autowired
+    private final ChatGPTClient chatGPTClient;
 
-    public TravelController(TravelService travelService) {
+    public TravelController(TravelService travelService, ChatGPTClient chatGPTClient) {
         this.travelService = travelService;
+        this.chatGPTClient = chatGPTClient;
     }
 
     @GetMapping("/{id}")
@@ -20,7 +25,8 @@ public class TravelController {
     }
 
     @PostMapping
-    public Travel createTravel(@RequestBody Travel travel){
+    public Travel createTravel(@RequestBody Travel travel) {
+        //APIResponse apiResponse= chatGPTClient.getChatSuggestion(apiRequest);
         travelService.saveTravel(travel);
         return travel;
     }

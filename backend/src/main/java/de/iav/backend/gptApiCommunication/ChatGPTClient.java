@@ -1,12 +1,15 @@
-package de.iav.backend.apiCommunication;
+package de.iav.backend.gptApiCommunication;
 
 import com.google.gson.Gson;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-
+@Service
+@RequiredArgsConstructor
 public class ChatGPTClient {
     private static final String API_URL = "https://api.openai.com/v1/chat/completions"; // Example API URL
     private final HttpClient client;

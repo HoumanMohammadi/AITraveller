@@ -1,4 +1,4 @@
-package de.iav.backend.apiCommunication;
+package de.iav.backend.gptApiCommunication;
 
 public class Message {
 
