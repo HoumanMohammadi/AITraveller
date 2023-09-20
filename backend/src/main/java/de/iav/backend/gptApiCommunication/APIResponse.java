@@ -14,6 +14,9 @@ public class APIResponse {
         this.choices = choices;
     }
 
+    public APIResponse() {
+    }
+
     public String getId() {
         return id;
     }
