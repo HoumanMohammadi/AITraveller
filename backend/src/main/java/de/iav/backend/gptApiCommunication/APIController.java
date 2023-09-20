@@ -12,7 +12,7 @@ public class APIController {
         this.chatGPTClient = chatGPTClient;
     }
 
-    @GetMapping
+    @PostMapping
     public APIResponse getTravelSuggestion(@RequestBody APIRequest apiRequest) throws Exception {
         return chatGPTClient.getChatSuggestion(apiRequest);
     }

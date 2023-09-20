@@ -2,21 +2,18 @@ package de.iav.backend.travel;
 
 import de.iav.backend.exception.TravelNotFoundException;
 import de.iav.backend.user.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class TravelService {
 
     private final TravelRepository travelRepository;
-    @Autowired
-    public TravelService(TravelRepository travelRepository) {
-        this.travelRepository = travelRepository;
-    }
-
     public List<Travel> getAllTravels(){
         return travelRepository.findAll();
     }
@@ -32,8 +29,8 @@ public class TravelService {
     public void deleteTravelById(String id){
         travelRepository.deleteById(id);
     }
-    public void deleteTravel(Optional<Travel> travel){
-        travelRepository.deleteTravel(travel);
+    public void deleteTravel(Travel travel){
+        travelRepository.delete(travel);
     }
     public Travel updateTravel(String id, Travel travelToUpdate) {
         travelRepository.findById(id).orElseThrow(() -> new TravelNotFoundException(id));

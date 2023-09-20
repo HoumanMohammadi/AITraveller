@@ -11,6 +11,9 @@ public class Choice {
         this.finish_reason = finish_reason;
     }
 
+    public Choice() {
+    }
+
     public int getIndex() {
         return index;
     }
