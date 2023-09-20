@@ -1,4 +1,4 @@
-package de.iav.frontend.model;
+package de.iav.frontend.gptApiCommunication;
 
 public record Message(
         String role,

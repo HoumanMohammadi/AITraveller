@@ -1,4 +1,4 @@
-package de.iav.frontend.model;
+package de.iav.frontend.user;
 
 public record User(
         String id,

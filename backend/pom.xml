@@ -60,6 +60,11 @@
 			<artifactId>netty-resolver-dns-native-macos</artifactId>
 			<version>4.1.97.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>com.github.lbovolini</groupId>
+			<artifactId>ObjectMapper</artifactId>
+			<version>0.2.3</version>
+		</dependency>
 	</dependencies>
 
 	<build>
