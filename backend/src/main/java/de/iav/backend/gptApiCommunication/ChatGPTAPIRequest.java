@@ -2,7 +2,7 @@ package de.iav.backend.gptApiCommunication;
 
 import java.util.List;
 
-public class APIRequest {
+public class ChatGPTAPIRequest {
     private String model;
     private List<Message> messages;
 

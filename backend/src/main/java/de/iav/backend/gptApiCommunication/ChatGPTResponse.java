@@ -2,19 +2,19 @@ package de.iav.backend.gptApiCommunication;
 
 import java.util.List;
 
-public class APIResponse {
+public class ChatGPTResponse {
 
     String id;
     String model;
     List<Choice> choices;
 
-    public APIResponse(String id, String model, List<Choice> choices) {
+    public ChatGPTResponse(String id, String model, List<Choice> choices) {
         this.id = id;
         this.model = model;
         this.choices = choices;
     }
 
-    public APIResponse() {
+    public ChatGPTResponse() {
     }
 
     public String getId() {
