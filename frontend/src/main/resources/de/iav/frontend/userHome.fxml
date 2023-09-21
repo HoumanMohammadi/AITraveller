@@ -12,7 +12,7 @@
       <Text layoutX="40.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0"
             text="AI Traveller is your tour guide to the unknown!" textAlignment="CENTER"
             wrappingWidth="318.21630859375"/>
-      <Button layoutX="33.0" layoutY="121.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="332.0"
+      <Button layoutX="33.0" layoutY="121.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="332.0" onAction="#openQuestionerView"
               text="find your next destination!"/>
       <Button layoutX="33.0" layoutY="174.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="332.0"
               text="plan a trip to  your destination"/>
