@@ -1,4 +1,4 @@
-package de.iav.frontend.gptApiCommunication;
+package de.iav.frontend.model;
 
 import java.util.List;
 

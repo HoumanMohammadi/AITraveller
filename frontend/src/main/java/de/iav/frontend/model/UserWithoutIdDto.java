@@ -1,4 +1,4 @@
-package de.iav.frontend.user;
+package de.iav.frontend.model;
 
 public record UserWithoutIdDto(
         String firstName,

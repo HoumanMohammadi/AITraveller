@@ -1,4 +1,4 @@
-package de.iav.frontend.user;
+package de.iav.frontend.controller;
 
 public class UserHomeController {
 }

@@ -57,8 +57,8 @@
     </dependency></dependencies>
 
   <build>
-        <plugins>
-            <plugin>
+    <plugins>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.11.0</version>
@@ -66,7 +66,7 @@
           <source>20</source>
           <target>20</target>
         </configuration>
-            </plugin>
+      </plugin>
       <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
@@ -87,6 +87,6 @@
           </execution>
         </executions>
       </plugin>
-          </plugins>
+    </plugins>
   </build>
 </project>

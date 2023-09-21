@@ -1,8 +1,4 @@
-package de.iav.frontend.travel;
-
-import de.iav.frontend.gptApiCommunication.APIResponse;
-import de.iav.frontend.gptApiCommunication.QuestionerAnswers;
-import de.iav.frontend.user.User;
+package de.iav.frontend.model;
 
 import java.time.LocalDateTime;
 
