@@ -1,6 +1,8 @@
 package de.iav.frontend.controller;
 
 import de.iav.frontend.model.User;
+import de.iav.frontend.service.SceneSwitchService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -8,7 +10,11 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-public class QuestionerController {
+import java.io.IOException;
+
+public class QuestionerPageOneController {
+    @FXML
+    private User user;
 
     @FXML
     private Button nextButton;
@@ -48,7 +54,14 @@ public class QuestionerController {
 
     @FXML
     private CheckBox mobilityNoCheckbox;
+    private final SceneSwitchService sceneSwitchService= SceneSwitchService.getInstance();
 
     public void setUserForQuestioner(User user) {
+    }
+
+    public void switchToQuestionerPageTwo(ActionEvent event) throws IOException {
+        System.out.println("go to questioner page 2");
+        sceneSwitchService.switchToQuestionerPageTwo(event, user);
+
     }
 }

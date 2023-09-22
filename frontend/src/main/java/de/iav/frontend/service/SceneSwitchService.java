@@ -1,6 +1,7 @@
 package de.iav.frontend.service;
 
-import de.iav.frontend.controller.QuestionerController;
+import de.iav.frontend.controller.QuestionerPageOneController;
+import de.iav.frontend.controller.QuestionerPageTwoController;
 import de.iav.frontend.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -28,11 +29,11 @@ public class SceneSwitchService {
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        QuestionerController questionerController = loader.getController();
-        questionerController.setUserForQuestioner(user);
+        QuestionerPageOneController questionerPageOneController = loader.getController();
+        questionerPageOneController.setUserForQuestioner(user);
 
         Scene scene = new Scene(root);
-        stage.setTitle("Questioner");
+        stage.setTitle("Questioner1");
         stage.setScene(scene);
 
         stage.show();
@@ -44,11 +45,11 @@ public class SceneSwitchService {
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        QuestionerController questionerController = loader.getController();
-        questionerController.setUserForQuestioner(user);
+        QuestionerPageTwoController questionerPageTwoController = loader.getController();
+        questionerPageTwoController.setUserForQuestioner(user);
 
         Scene scene = new Scene(root);
-        stage.setTitle("Questioner");
+        stage.setTitle("Questioner2");
         stage.setScene(scene);
 
         stage.show();
