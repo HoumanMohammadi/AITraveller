@@ -11,8 +11,8 @@ public class UserHomeController {
     @FXML
     private User user;
     private final SceneSwitchService sceneSwitchService= SceneSwitchService.getInstance();
-    public void openQuestionerView(ActionEvent event) throws IOException {
-        System.out.println("got to questioner");
+    public void openQuestionerPageOneView(ActionEvent event) throws IOException {
+        System.out.println("go to questioner page 1");
         sceneSwitchService.switchToQuestionerPageOne(event, user);
     }
 }

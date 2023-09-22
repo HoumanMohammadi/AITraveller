@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="268.0" xmlns="http://javafx.com/javafx/20.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.iav.frontend.controller.UserHomeController">
+<AnchorPane prefHeight="400.0" prefWidth="268.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.iav.frontend.controller.UserHomeController">
    <AnchorPane layoutY="-1.0" prefHeight="487.0" prefWidth="396.0">
-      <Text layoutX="40.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0"
-            text="AI Traveller is your tour guide to the unknown!" textAlignment="CENTER"
-            wrappingWidth="318.21630859375"/>
-      <Button layoutX="33.0" layoutY="121.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="332.0" onAction="#openQuestionerView"
-              text="find your next destination!"/>
-      <Button layoutX="33.0" layoutY="174.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="332.0"
-              text="plan a trip to  your destination"/>
-      <Button layoutX="33.0" layoutY="391.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="332.0"
-              text="See travel history"/>
-      <TextArea layoutX="33.0" layoutY="224.0" prefHeight="107.0" prefWidth="332.0"/>
+      <Text layoutX="40.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AI Traveller is your tour guide to the unknown!" textAlignment="CENTER" wrappingWidth="318.21630859375" />
+      <Button layoutX="32.0" layoutY="304.0" mnemonicParsing="false" onAction="#openQuestionerPageOneView" prefHeight="50.0" prefWidth="332.0" text="start planing your trip!">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button layoutX="33.0" layoutY="383.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="332.0" text="See travel history" />
+      <Text layoutX="112.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I can assist you to plan your next trip for you! " textAlignment="CENTER" wrappingWidth="171.21630859375">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text layoutX="113.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="let me know you a little first!" textAlignment="CENTER" wrappingWidth="171.21630859375">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
    </AnchorPane>
 </AnchorPane>
