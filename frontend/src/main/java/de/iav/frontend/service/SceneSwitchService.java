@@ -2,6 +2,7 @@ package de.iav.frontend.service;
 
 import de.iav.frontend.controller.QuestionerPageOneController;
 import de.iav.frontend.controller.QuestionerPageTwoController;
+import de.iav.frontend.controller.UserHomeController;
 import de.iav.frontend.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -50,6 +51,21 @@ public class SceneSwitchService {
 
         Scene scene = new Scene(root);
         stage.setTitle("Questioner2");
+        stage.setScene(scene);
+
+        stage.show();
+    }
+
+    public void switchToUserHome(ActionEvent event, User user) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/iav/frontend/userHome.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        UserHomeController userHomeController = loader.getController();
+        userHomeController.setUserForHome(user);
+
+        Scene scene = new Scene(root);
+        stage.setTitle("UserHome");
         stage.setScene(scene);
 
         stage.show();

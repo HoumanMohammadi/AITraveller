@@ -2,10 +2,16 @@ package de.iav.frontend.controller;
 
 
 import de.iav.frontend.model.User;
+import de.iav.frontend.service.SceneSwitchService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.io.IOException;
+
 public class QuestionerPageTwoController {
+
+    private final SceneSwitchService sceneSwitchService= SceneSwitchService.getInstance();
 
     @FXML
     private ChoiceBox<String> travelDurationChoiceBox;
@@ -45,6 +51,8 @@ public class QuestionerPageTwoController {
 
     @FXML
     private Button backButton;
+    @FXML
+    private User user;
 
     @FXML
     private void initialize() {
@@ -77,6 +85,10 @@ public class QuestionerPageTwoController {
     }
 
     public void setUserForQuestioner(User user) {
+    }
+
+    public void switchToPageOne(ActionEvent event) throws IOException {
+        sceneSwitchService.switchToQuestionerPageOne(event, user);
     }
 
     // Add methods for handling checkbox selections if needed

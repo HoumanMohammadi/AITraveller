@@ -15,4 +15,7 @@ public class UserHomeController {
         System.out.println("go to questioner page 1");
         sceneSwitchService.switchToQuestionerPageOne(event, user);
     }
+
+    public void setUserForHome(User user) {
+    }
 }

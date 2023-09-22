@@ -64,4 +64,8 @@ public class QuestionerPageOneController {
         sceneSwitchService.switchToQuestionerPageTwo(event, user);
 
     }
+
+    public void switchToUserHome(ActionEvent event) throws IOException {
+        sceneSwitchService.switchToUserHome(event, user);
+    }
 }
