@@ -3,7 +3,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,39 +13,45 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="400.0" prefWidth="268.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.iav.frontend.controller.QuestionerPageOneController">
+
    <ImageView fitHeight="487.0" fitWidth="396.0" opacity="0.3">
-      <Image url="@../../../../../../../../../Downloads/3.jpeg"/>
+      <Image url="@../../../../../../../../../Downloads/3.jpeg" />
    </ImageView>
-   <AnchorPane prefHeight="487.0" prefWidth="396.0">
-      <Button layoutX="252.0" layoutY="410.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" text="Next" onAction="#switchToQuestionerPageTwo"/>
+
+   <AnchorPane layoutX="-14.0" layoutY="1.0" prefHeight="487.0" prefWidth="396.0">
+      <Button layoutX="252.0" layoutY="410.0" mnemonicParsing="false" onAction="#switchToQuestionerPageTwo" prefHeight="38.0" prefWidth="100.0" text="Next" />
       <Text layoutX="44.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How old are you?">
             <Font name="Osaka" size="13.0" />
          </Text>
+
+         <RadioButton fx:id="yesRadioButton" layoutX="198.0" layoutY="357.0" mnemonicParsing="false" onAction="#handleDisabilityRadioButtonAction" text="YES">
+         <toggleGroup>
+            <ToggleGroup fx:id="disabilityToggleGroup" />
+         </toggleGroup></RadioButton>
+         <RadioButton fx:id="noRadioButton" layoutX="44.0" layoutY="357.0" mnemonicParsing="false" onAction="#handleDisabilityRadioButtonAction" text="NO" toggleGroup="$disabilityToggleGroup" />
       </AnchorPane>
-      <TextField layoutX="44.0" layoutY="261.0" prefHeight="26.0" prefWidth="302.0" />
+      <TextField fx:id="locationTextField" layoutX="44.0" layoutY="261.0" onAction="#setHomeTown" prefHeight="26.0" prefWidth="302.0" />
       <Text layoutX="47.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Who are you travelling with?">
          <font>
             <Font name="Osaka" size="13.0" />
          </font>
       </Text>
-      <ChoiceBox layoutX="44.0" layoutY="80.0" prefWidth="150.0" />
-      <CheckBox layoutX="44.0" layoutY="156.0" mnemonicParsing="false" text="Alone" />
-      <CheckBox layoutX="44.0" layoutY="195.0" mnemonicParsing="false" text="parents" />
-      <CheckBox layoutX="157.0" layoutY="156.0" mnemonicParsing="false" text="partner" />
-      <CheckBox layoutX="157.0" layoutY="195.0" mnemonicParsing="false" text="Children" />
-      <CheckBox layoutX="264.0" layoutY="156.0" mnemonicParsing="false" text="Friends" />
+      <ChoiceBox fx:id="ageChoiceBox" layoutX="44.0" layoutY="80.0" prefWidth="150.0" onAction="#handleAgeChoiceBox"/>
+      <CheckBox fx:id="aloneCheckbox" layoutX="44.0" layoutY="156.0" mnemonicParsing="false" onAction="#handleCheckboxAction" text="Alone" />
+      <CheckBox fx:id="parentsCheckbox" layoutX="44.0" layoutY="195.0" mnemonicParsing="false" onAction="#handleCheckboxAction" text="parents" />
+      <CheckBox fx:id="partnerCheckbox" layoutX="157.0" layoutY="156.0" mnemonicParsing="false" onAction="#handleCheckboxAction" text="partner" />
+      <CheckBox fx:id="childrenCheckbox" layoutX="157.0" layoutY="195.0" mnemonicParsing="false" onAction="#handleCheckboxAction" text="Children" />
+      <CheckBox fx:id="friendsCheckbox" layoutX="264.0" layoutY="156.0" mnemonicParsing="false" onAction="#handleCheckboxAction" text="Friends" />
       <Text layoutX="47.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Where do you live? (ex.: Berlin, Germany)">
          <font>
             <Font name="Osaka" size="13.0" />
          </font>
       </Text>
-      <Button layoutX="47.0" layoutY="410.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" text="Back" onAction="#switchToUserHome"/>
+      <Button layoutX="47.0" layoutY="410.0" mnemonicParsing="false" onAction="#switchToUserHome" prefHeight="38.0" prefWidth="100.0" text="Back" />
       <Text layoutX="44.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Do you or any member of your group have any mobility-related disabilities? " wrappingWidth="302.0">
          <font>
             <Font name="Osaka" size="13.0" />
          </font>
       </Text>
-      <CheckBox layoutX="162.0" layoutY="358.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="66.0" text="NO" />
-      <CheckBox layoutX="44.0" layoutY="358.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="66.0" text="YES" />
-   </AnchorPane>
 
+   </AnchorPane>

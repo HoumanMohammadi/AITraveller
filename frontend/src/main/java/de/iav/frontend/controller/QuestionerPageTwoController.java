@@ -1,6 +1,7 @@
 package de.iav.frontend.controller;
 
 
+import de.iav.frontend.model.QuestionerAnswers;
 import de.iav.frontend.model.User;
 import de.iav.frontend.service.SceneSwitchService;
 import javafx.event.ActionEvent;
@@ -8,9 +9,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class QuestionerPageTwoController {
-
+    private QuestionerAnswers questionerAnswers;
     private final SceneSwitchService sceneSwitchService= SceneSwitchService.getInstance();
     @FXML
     public RadioButton springRadioButton;
@@ -44,14 +47,13 @@ public class QuestionerPageTwoController {
     private ToggleGroup seasonToggleGroup;
     @FXML
     private User user;
+    private  QuestionerAnswers.Builder questionerBuilder;
     @FXML
     private void initialize() {
         if (travelDurationChoiceBox != null) {
             travelDurationChoiceBox.getItems().addAll("1 day", "2 days", "3 days", "4 days", "5 days");
-            travelDurationChoiceBox.setValue("1 day");
+            travelDurationChoiceBox.setValue("--SELECT--");
         }
-
-        seasonToggleGroup.getToggles().addAll(springRadioButton, summerRadioButton, fallRadioButton, winterRadioButton);
     }
 
     @FXML
@@ -59,28 +61,40 @@ public class QuestionerPageTwoController {
         RadioButton selectedRadioButton = (RadioButton) seasonToggleGroup.getSelectedToggle();
         if (selectedRadioButton != null) {
             String selectedSeason = selectedRadioButton.getText();
+            questionerBuilder= questionerBuilder.season(selectedSeason);
             System.out.println("Selected Season: " + selectedSeason);
         } else {
             System.out.println("No season selected.");
         }
     }
-    public void setUserForQuestioner(User user) {
-    }
+
+
+
 
     public void switchToPageOne(ActionEvent event) throws IOException {
-        sceneSwitchService.switchToQuestionerPageOne(event, user);
+        sceneSwitchService.switchToQuestionerPageOne(event, questionerBuilder);
     }
     @FXML
     private void handleCheckboxAction() {
-        // Example: Check if the hiking checkbox is selected
-        boolean isHikingSelected = hikingCheckbox.isSelected();
-        boolean isScubaDivingSelected= scubaDivingCheckbox.isSelected();
-        boolean isSurfingSelected= surfingCheckbox.isSelected();
-        boolean isYogaSelected= yogaCheckbox.isSelected();
-        boolean isSkiingSelected= skiingCheckbox.isSelected();
-        boolean isSwimmingSelected= swimmingCheckbox.isSelected();
-        boolean isSailingSelected= sailingCheckbox.isSelected();
-        boolean isPokerSelected= pokerCheckbox.isSelected();
-        boolean isSunBathingSelected= sunBathingCheckbox.isSelected();
+        List<String> activities = new ArrayList<>();
+        if (hikingCheckbox.isSelected()) activities.add("Hiking");
+        if (scubaDivingCheckbox.isSelected()) activities.add("Scuba Diving");
+        if (surfingCheckbox.isSelected()) activities.add("Surfing");
+        if (yogaCheckbox.isSelected()) activities.add("Yoga");
+        if (skiingCheckbox.isSelected()) activities.add("Skiing");
+        if (swimmingCheckbox.isSelected()) activities.add("Swimming");
+        if (sailingCheckbox.isSelected()) activities.add("Sailing");
+        if (pokerCheckbox.isSelected()) activities.add("Poker");
+        if (sunBathingCheckbox.isSelected()) activities.add("Sun Bathing");
+
+        questionerBuilder = questionerBuilder.activity(activities);
+    }
+
+    public void setQuestionerBuilder(QuestionerAnswers.Builder questionerBuilder) {
+        this.questionerBuilder = questionerBuilder;
+    }
+
+    public void handletravelDuration(ActionEvent event) {
+        questionerBuilder.travelDuration(travelDurationChoiceBox.getValue());
     }
 }

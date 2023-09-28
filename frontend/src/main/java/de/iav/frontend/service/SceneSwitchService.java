@@ -3,6 +3,7 @@ package de.iav.frontend.service;
 import de.iav.frontend.controller.QuestionerPageOneController;
 import de.iav.frontend.controller.QuestionerPageTwoController;
 import de.iav.frontend.controller.UserHomeController;
+import de.iav.frontend.model.QuestionerAnswers;
 import de.iav.frontend.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -24,14 +25,14 @@ public class SceneSwitchService {
         return instance;
     }
 
-    public void switchToQuestionerPageOne(ActionEvent event, User user) throws IOException {
+    public void switchToQuestionerPageOne(ActionEvent event, QuestionerAnswers.Builder questionerBuilder) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/iav/frontend/QuestionerPageOne.fxml"));
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         QuestionerPageOneController questionerPageOneController = loader.getController();
-        questionerPageOneController.setUserForQuestioner(user);
+        //questionerPageOneController.setQuestionerBuilder(questionerBuilder);
 
         Scene scene = new Scene(root);
         stage.setTitle("Questioner1");
@@ -40,14 +41,14 @@ public class SceneSwitchService {
         stage.show();
     }
 
-    public void switchToQuestionerPageTwo(ActionEvent event, User user) throws IOException {
+    public void switchToQuestionerPageTwo(ActionEvent event, QuestionerAnswers.Builder questionerBuilder) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/iav/frontend/QuestionerPageTwo.fxml"));
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         QuestionerPageTwoController questionerPageTwoController = loader.getController();
-        questionerPageTwoController.setUserForQuestioner(user);
+        questionerPageTwoController.setQuestionerBuilder(questionerBuilder);
 
         Scene scene = new Scene(root);
         stage.setTitle("Questioner2");
