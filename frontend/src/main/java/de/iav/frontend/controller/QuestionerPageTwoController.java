@@ -7,6 +7,7 @@ import de.iav.frontend.service.SceneSwitchService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.DragEvent;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,13 +54,12 @@ public class QuestionerPageTwoController {
 
 
     @FXML
-    private void initialize() {
-        setQuestionerBuilder(questionerBuilder);
-        //System.out.println(questionerBuilder.toString());
-/*        if (travelDurationChoiceBox != null) {
+    public void initializeTravelDurationBox() {
+
+        if (travelDurationChoiceBox != null) {
             travelDurationChoiceBox.getItems().addAll("1 day", "2 days", "3 days", "4 days", "5 days", "5 to 8 days", "8 to 12 days", "12 to 16 days", "3 weeks", "4 weeks");
             travelDurationChoiceBox.setValue("--SELECT--");
-        }*/
+        }
     }
 
     @FXML
@@ -75,7 +75,8 @@ public class QuestionerPageTwoController {
     }
 
     public void switchToPageOne(ActionEvent event) throws IOException {
-        sceneSwitchService.switchToQuestionerPageOne(event, questionerBuilder);
+        setQuestionerBuilder(questionerBuilder);
+        sceneSwitchService.switchToQuestionerPageOneFromTwo(event, questionerBuilder);
     }
     @FXML
     private void handleCheckboxAction() {
@@ -95,6 +96,7 @@ public class QuestionerPageTwoController {
         if (sunBathingCheckbox.isSelected()) activities.add("Sun Bathing");
 
         questionerBuilder = questionerBuilder.activity(activities);
+        System.out.println(questionerBuilder.toString());
     }
 
     public void setQuestionerBuilder(QuestionerAnswers.Builder questionerBuilder) {
@@ -107,9 +109,12 @@ public class QuestionerPageTwoController {
             System.out.println("Error: questionerBuilder is null.");
         }
     }
+
     @FXML
     public void handleTravelDuration(ActionEvent event) {
         questionerBuilder.travelDuration(travelDurationChoiceBox.getValue());
+        System.out.println("travel duration: "+ travelDurationChoiceBox.getValue());
+        System.out.println(questionerBuilder.toString());
     }
 }
 

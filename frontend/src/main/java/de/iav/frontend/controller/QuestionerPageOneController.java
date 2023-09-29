@@ -52,11 +52,13 @@ public class QuestionerPageOneController {
     private final SceneSwitchService sceneSwitchService= SceneSwitchService.getInstance();
     @FXML
     private QuestionerAnswers.Builder questionerBuilder = new QuestionerAnswers.Builder("", new ArrayList<>(), "", false, "", new ArrayList<>(), "", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+    private List<String> coTraveller = new ArrayList<>();
 
     @FXML
     private void initialize() {
-        setQuestionerBuilder(questionerBuilder);
-        System.out.println(questionerBuilder.toString());
+
+        /*setQuestionerBuilder(questionerBuilder);
+        System.out.println(questionerBuilder.toString());*/
         if ( ageChoiceBox != null) {
             ageChoiceBox.getItems().addAll("16 to 20", "20 to 30", "30 to 40", "40 to 50", "50 to 70", "over 70");
             ageChoiceBox.setValue("--SELECT--");
@@ -68,27 +70,27 @@ public class QuestionerPageOneController {
     }
 
     @FXML
-    private void handleCheckboxAction() {
-        System.out.println("Alone Checkbox selected: " + aloneCheckbox.isSelected());
-        System.out.println("Parents Checkbox selected: " + parentsCheckbox.isSelected());
-        System.out.println("Partner Checkbox selected: " + partnerCheckbox.isSelected());
-        System.out.println("Children Checkbox selected: " + childrenCheckbox.isSelected());
-        System.out.println("Friends Checkbox selected: " + friendsCheckbox.isSelected());
-
-        List<String> coTraveller = new ArrayList<>();
+    private void handleCheckboxAction(ActionEvent event) {
+        coTraveller.clear();
         if (aloneCheckbox.isSelected()) coTraveller.add("alone");
         if (parentsCheckbox.isSelected()) coTraveller.add("parents");
         if (partnerCheckbox.isSelected()) coTraveller.add("partner");
         if (childrenCheckbox.isSelected()) coTraveller.add("children");
         if (friendsCheckbox.isSelected()) coTraveller.add("friends");
 
-        System.out.println("Co-traveller List: " + coTraveller);
+        questionerBuilder.coTraveller.clear();
+        questionerBuilder.coTraveller.addAll(coTraveller);
 
-        questionerBuilder = questionerBuilder.coTraveller(coTraveller);
+        System.out.println("Co-traveller List: " + coTraveller);
         System.out.println(questionerBuilder.toString());
     }
 
     public void setQuestionerBuilder(QuestionerAnswers.Builder questionerBuilder) {
+        if (questionerBuilder== null){
+            questionerBuilder = new QuestionerAnswers.Builder("", new ArrayList<>(), "", false, "", new ArrayList<>(), "", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+
+        }
+        else
             this.questionerBuilder = questionerBuilder;
     }
 

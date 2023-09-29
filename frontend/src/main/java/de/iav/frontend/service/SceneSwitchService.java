@@ -45,17 +45,39 @@ public class SceneSwitchService {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/iav/frontend/QuestionerPageTwo.fxml"));
         System.out.println("debugger   "+questionerBuilder.toString());
-
-        QuestionerPageTwoController controllerTwo = loader.getController();
-        //controllerTwo.setQuestionerBuilder(questionerBuilder);
         Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        QuestionerPageTwoController controllerTwo = loader.getController();
+        //QuestionerPageOneController controllerOne = loader.getController();
+        //System.out.println("controllerOne.getQuestionerBuilder()" + controllerOne.getQuestionerBuilder().toString());
+        controllerTwo.setQuestionerBuilder(questionerBuilder);
+        controllerTwo.initializeTravelDurationBox();
+
         System.out.println("Debug: setQuestionerBuilder called with non-null questionerBuilder");
 
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
 
         Scene scene = new Scene(root);
         stage.setTitle("Questioner2");
+        stage.setScene(scene);
+
+        stage.show();
+
+    }
+
+    public void switchToQuestionerPageOneFromTwo(ActionEvent event, QuestionerAnswers.Builder questionerBuilder) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/iav/frontend/QuestionerPageOne.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        QuestionerPageOneController questionerPageOneController = loader.getController();
+        questionerPageOneController.setQuestionerBuilder(questionerBuilder);
+
+        Scene scene = new Scene(root);
+        stage.setTitle("Questioner1");
         stage.setScene(scene);
 
         stage.show();

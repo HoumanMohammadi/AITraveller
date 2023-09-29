@@ -69,7 +69,7 @@ public class QuestionerAnswers {
 
     public static class Builder {
         private String age;
-        private List<String> coTraveller;
+        public List<String> coTraveller;
         private  String livingCity;
         private  boolean disability;
         private String travelDuration;
