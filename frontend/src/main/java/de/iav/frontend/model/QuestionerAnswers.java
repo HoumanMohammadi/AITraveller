@@ -108,6 +108,8 @@ public class QuestionerAnswers {
             this.destinationContinent = destinationContinent;
         }
 
+
+
         public Builder livingCity(String livingCity) {
             this.livingCity = livingCity;
             return this;

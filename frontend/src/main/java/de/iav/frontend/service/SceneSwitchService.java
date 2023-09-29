@@ -44,11 +44,15 @@ public class SceneSwitchService {
     public void switchToQuestionerPageTwo(ActionEvent event, QuestionerAnswers.Builder questionerBuilder) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/iav/frontend/QuestionerPageTwo.fxml"));
+        System.out.println("debugger   "+questionerBuilder.toString());
+
+        QuestionerPageTwoController controllerTwo = loader.getController();
+        //controllerTwo.setQuestionerBuilder(questionerBuilder);
         Parent root = loader.load();
+        System.out.println("Debug: setQuestionerBuilder called with non-null questionerBuilder");
+
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        QuestionerPageTwoController questionerPageTwoController = loader.getController();
-        questionerPageTwoController.setQuestionerBuilder(questionerBuilder);
 
         Scene scene = new Scene(root);
         stage.setTitle("Questioner2");

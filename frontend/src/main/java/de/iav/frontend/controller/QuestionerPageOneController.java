@@ -55,12 +55,18 @@ public class QuestionerPageOneController {
 
     @FXML
     private void initialize() {
+        setQuestionerBuilder(questionerBuilder);
         System.out.println(questionerBuilder.toString());
         if ( ageChoiceBox != null) {
             ageChoiceBox.getItems().addAll("16 to 20", "20 to 30", "30 to 40", "40 to 50", "50 to 70", "over 70");
             ageChoiceBox.setValue("--SELECT--");
         }
     }
+
+    public QuestionerAnswers.Builder getQuestionerBuilder() {
+        return questionerBuilder;
+    }
+
     @FXML
     private void handleCheckboxAction() {
         System.out.println("Alone Checkbox selected: " + aloneCheckbox.isSelected());
@@ -81,9 +87,15 @@ public class QuestionerPageOneController {
         questionerBuilder = questionerBuilder.coTraveller(coTraveller);
         System.out.println(questionerBuilder.toString());
     }
+
+    public void setQuestionerBuilder(QuestionerAnswers.Builder questionerBuilder) {
+            this.questionerBuilder = questionerBuilder;
+    }
+
     public void switchToQuestionerPageTwo(ActionEvent event) throws IOException {
         System.out.println("go to questioner page 2");
         System.out.println(questionerBuilder.toString());
+        setQuestionerBuilder(questionerBuilder);
         sceneSwitchService.switchToQuestionerPageTwo(event, questionerBuilder);
     }
 

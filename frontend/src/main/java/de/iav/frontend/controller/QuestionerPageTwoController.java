@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionerPageTwoController {
+    @FXML
     private QuestionerAnswers questionerAnswers;
     private final SceneSwitchService sceneSwitchService= SceneSwitchService.getInstance();
     @FXML
@@ -48,12 +49,17 @@ public class QuestionerPageTwoController {
     @FXML
     private User user;
     private  QuestionerAnswers.Builder questionerBuilder;
+    private QuestionerPageOneController questionerPageOneController;
+
+
     @FXML
     private void initialize() {
-        if (travelDurationChoiceBox != null) {
-            travelDurationChoiceBox.getItems().addAll("1 day", "2 days", "3 days", "4 days", "5 days");
+        setQuestionerBuilder(questionerBuilder);
+        //System.out.println(questionerBuilder.toString());
+/*        if (travelDurationChoiceBox != null) {
+            travelDurationChoiceBox.getItems().addAll("1 day", "2 days", "3 days", "4 days", "5 days", "5 to 8 days", "8 to 12 days", "12 to 16 days", "3 weeks", "4 weeks");
             travelDurationChoiceBox.setValue("--SELECT--");
-        }
+        }*/
     }
 
     @FXML
@@ -68,16 +74,17 @@ public class QuestionerPageTwoController {
         }
     }
 
-
-
-
     public void switchToPageOne(ActionEvent event) throws IOException {
         sceneSwitchService.switchToQuestionerPageOne(event, questionerBuilder);
     }
     @FXML
     private void handleCheckboxAction() {
         List<String> activities = new ArrayList<>();
-        if (hikingCheckbox.isSelected()) activities.add("Hiking");
+        if (hikingCheckbox.isSelected()){
+            activities.add("Hiking");
+            System.out.println("Hiking added");
+            System.out.println(questionerBuilder.toString());
+        }
         if (scubaDivingCheckbox.isSelected()) activities.add("Scuba Diving");
         if (surfingCheckbox.isSelected()) activities.add("Surfing");
         if (yogaCheckbox.isSelected()) activities.add("Yoga");
@@ -91,10 +98,18 @@ public class QuestionerPageTwoController {
     }
 
     public void setQuestionerBuilder(QuestionerAnswers.Builder questionerBuilder) {
-        this.questionerBuilder = questionerBuilder;
+        if (questionerBuilder != null) {
+            System.out.println("before");
+            this.questionerBuilder = questionerBuilder;
+            System.out.println("after");
+        } else {
+            // Handle the case where questionerBuilder is null
+            System.out.println("Error: questionerBuilder is null.");
+        }
     }
-
-    public void handletravelDuration(ActionEvent event) {
+    @FXML
+    public void handleTravelDuration(ActionEvent event) {
         questionerBuilder.travelDuration(travelDurationChoiceBox.getValue());
     }
 }
+
