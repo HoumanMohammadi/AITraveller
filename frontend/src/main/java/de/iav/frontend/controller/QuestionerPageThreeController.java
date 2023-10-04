@@ -1,6 +1,7 @@
 package de.iav.frontend.controller;
 
 import de.iav.frontend.model.QuestionerAnswers;
+import de.iav.frontend.service.GetSuggestionService;
 import de.iav.frontend.service.SceneSwitchService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -47,6 +48,7 @@ public class QuestionerPageThreeController {
     public TextField preferredDestinationTextField;
 
     private  QuestionerAnswers.Builder questionerBuilder;
+    private final GetSuggestionService getSuggestionService = GetSuggestionService.getInstance();
 
     public void setQuestionerBuilder(QuestionerAnswers.Builder questionerBuilder) {
         if (questionerBuilder != null) {
@@ -115,5 +117,10 @@ public class QuestionerPageThreeController {
 
         questionerBuilder = questionerBuilder.destinationContinent(travelContinent);
         System.out.println(questionerBuilder.toString());
+    }
+
+    public void sendPreferenceToBackend(ActionEvent event) {
+        setQuestionerBuilder(questionerBuilder);
+        getSuggestionService.getSuggestion(questionerBuilder);
     }
 }
