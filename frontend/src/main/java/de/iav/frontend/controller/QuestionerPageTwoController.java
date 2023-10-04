@@ -78,6 +78,11 @@ public class QuestionerPageTwoController {
         setQuestionerBuilder(questionerBuilder);
         sceneSwitchService.switchToQuestionerPageOneFromTwo(event, questionerBuilder);
     }
+
+    public void switchToPageThree(ActionEvent event) throws IOException {
+        setQuestionerBuilder(questionerBuilder);
+        sceneSwitchService.switchToQuestionerPageThree(event, questionerBuilder);
+    }
     @FXML
     private void handleCheckboxAction() {
         List<String> activities = new ArrayList<>();

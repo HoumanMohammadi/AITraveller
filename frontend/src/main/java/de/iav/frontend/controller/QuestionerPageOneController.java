@@ -51,7 +51,7 @@ public class QuestionerPageOneController {
     private CheckBox mobilityNoCheckbox;
     private final SceneSwitchService sceneSwitchService= SceneSwitchService.getInstance();
     @FXML
-    private QuestionerAnswers.Builder questionerBuilder = new QuestionerAnswers.Builder("", new ArrayList<>(), "", false, "", new ArrayList<>(), "", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+    private QuestionerAnswers.Builder questionerBuilder = new QuestionerAnswers.Builder("", new ArrayList<>(), "", false, "", new ArrayList<>(), "", "", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
     private List<String> coTraveller = new ArrayList<>();
 
     @FXML
@@ -87,7 +87,7 @@ public class QuestionerPageOneController {
 
     public void setQuestionerBuilder(QuestionerAnswers.Builder questionerBuilder) {
         if (questionerBuilder== null){
-            questionerBuilder = new QuestionerAnswers.Builder("", new ArrayList<>(), "", false, "", new ArrayList<>(), "", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+            questionerBuilder = new QuestionerAnswers.Builder("", new ArrayList<>(), "", false, "", new ArrayList<>(), "", "", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
         }
         else

@@ -75,6 +75,7 @@ public class QuestionerAnswers {
         private String travelDuration;
         private List<String> activity;
         private String season;
+        private String preferredDestination;
         private List<String> meansOfTravel;
         private List<String> travelPurpose;
         private List<String> destinationContinent;
@@ -92,10 +93,11 @@ public class QuestionerAnswers {
                     ", meansOfTravel=" + meansOfTravel +
                     ", travelPurpose=" + travelPurpose +
                     ", destinationContinent=" + destinationContinent +
+                    ", preferredDestination=" + preferredDestination +
                     '}';
         }
 
-        public Builder(String age, List<String> coTraveller, String livingCity, boolean disability, String travelDuration, List<String> activity, String season, List<String> meansOfTravel, List<String> travelPurpose, List<String> destinationContinent) {
+        public Builder(String age, List<String> coTraveller, String livingCity, boolean disability, String travelDuration, List<String> activity, String season, String preferredDestination, List<String> meansOfTravel, List<String> travelPurpose, List<String> destinationContinent) {
             this.age = age;
             this.coTraveller = coTraveller;
             this.livingCity = livingCity;
@@ -103,6 +105,7 @@ public class QuestionerAnswers {
             this.travelDuration = travelDuration;
             this.activity = activity;
             this.season = season;
+            this.preferredDestination = preferredDestination;
             this.meansOfTravel = meansOfTravel;
             this.travelPurpose = travelPurpose;
             this.destinationContinent = destinationContinent;
@@ -112,6 +115,11 @@ public class QuestionerAnswers {
 
         public Builder livingCity(String livingCity) {
             this.livingCity = livingCity;
+            return this;
+        }
+
+        public Builder preferredDestination(String preferredDestination) {
+            this.preferredDestination = preferredDestination;
             return this;
         }
 

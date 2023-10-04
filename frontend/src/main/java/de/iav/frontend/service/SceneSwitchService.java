@@ -1,6 +1,7 @@
 package de.iav.frontend.service;
 
 import de.iav.frontend.controller.QuestionerPageOneController;
+import de.iav.frontend.controller.QuestionerPageThreeController;
 import de.iav.frontend.controller.QuestionerPageTwoController;
 import de.iav.frontend.controller.UserHomeController;
 import de.iav.frontend.model.QuestionerAnswers;
@@ -49,15 +50,8 @@ public class SceneSwitchService {
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         QuestionerPageTwoController controllerTwo = loader.getController();
-        //QuestionerPageOneController controllerOne = loader.getController();
-        //System.out.println("controllerOne.getQuestionerBuilder()" + controllerOne.getQuestionerBuilder().toString());
         controllerTwo.setQuestionerBuilder(questionerBuilder);
         controllerTwo.initializeTravelDurationBox();
-
-        System.out.println("Debug: setQuestionerBuilder called with non-null questionerBuilder");
-
-
-
 
         Scene scene = new Scene(root);
         stage.setTitle("Questioner2");
@@ -81,6 +75,25 @@ public class SceneSwitchService {
         stage.setScene(scene);
 
         stage.show();
+    }
+
+    public void switchToQuestionerPageThree(ActionEvent event, QuestionerAnswers.Builder questionerBuilder) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/iav/frontend/QuestionerPageThree.fxml"));
+        System.out.println("debugger   "+questionerBuilder.toString());
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        QuestionerPageThreeController controllerThree = loader.getController();
+        controllerThree.setQuestionerBuilder(questionerBuilder);
+        //controllerThree.initializeTravelDurationBox();
+
+        Scene scene = new Scene(root);
+        stage.setTitle("Questioner3");
+        stage.setScene(scene);
+
+        stage.show();
+
     }
 
     public void switchToUserHome(ActionEvent event, User user) throws IOException {
