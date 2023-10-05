@@ -27,20 +27,21 @@ public class GetSuggestionService {
         return instance;
     }
 
-    private String mapToString(String json) {
+    private String mapToString(Object object) {
         try {
-            return objectMapper.readValue(json, String.class);
+            return objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Failed to map preference", e);
         }
     }
+
 
     public String getSuggestion(QuestionerAnswers.Builder questionerBuilder) {
         try {
             //StudentWithoutMatriculationNumber studentDto = generateOneStudentDto();
             String requestBody = objectMapper.writeValueAsString(questionerBuilder);
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("http://localhost:8080/api/questioner"))
+                    .uri(URI.create("http://localhost:8080/api/questioner/questionAnswers"))
                     .header("Content-Type", "application/json")
                     .header("Accept", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
