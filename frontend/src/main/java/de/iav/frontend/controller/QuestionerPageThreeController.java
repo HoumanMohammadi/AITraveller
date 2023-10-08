@@ -121,6 +121,6 @@ public class QuestionerPageThreeController {
 
     public void sendPreferenceToBackend(ActionEvent event) {
         setQuestionerBuilder(questionerBuilder);
-        getSuggestionService.getSuggestion(questionerBuilder);
+        getSuggestionService.getSuggestion(questionerBuilder.build());
     }
 }

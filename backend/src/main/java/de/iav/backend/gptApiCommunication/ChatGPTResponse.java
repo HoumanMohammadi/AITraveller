@@ -6,9 +6,9 @@ public class ChatGPTResponse {
 
     String id;
     String model;
-    List<Choice> choices;
+    List<Choices> choices;
 
-    public ChatGPTResponse(String id, String model, List<Choice> choices) {
+    public ChatGPTResponse(String id, String model, List<Choices> choices) {
         this.id = id;
         this.model = model;
         this.choices = choices;
@@ -33,11 +33,11 @@ public class ChatGPTResponse {
         this.model = model;
     }
 
-    public List<Choice> getChoices() {
+    public List<Choices> getChoices() {
         return choices;
     }
 
-    public void setChoices(List<Choice> choices) {
+    public void setChoices(List<Choices> choices) {
         this.choices = choices;
     }
 }

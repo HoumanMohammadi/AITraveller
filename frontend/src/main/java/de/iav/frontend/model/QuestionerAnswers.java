@@ -27,6 +27,46 @@ public class QuestionerAnswers {
         this.destinationContinent = builder.destinationContinent;
     }
 
+    public String getAge() {
+        return age;
+    }
+
+    public List<String> getCoTraveller() {
+        return coTraveller;
+    }
+
+    public String getLivingCity() {
+        return livingCity;
+    }
+
+    public boolean isDisability() {
+        return disability;
+    }
+
+    public String getTravelDuration() {
+        return travelDuration;
+    }
+
+    public List<String> getActivity() {
+        return activity;
+    }
+
+    public String getSeason() {
+        return season;
+    }
+
+    public List<String> getMeansOfTravel() {
+        return meansOfTravel;
+    }
+
+    public List<String> getTravelPurpose() {
+        return travelPurpose;
+    }
+
+    public List<String> getDestinationContinent() {
+        return destinationContinent;
+    }
+
     public String age() {
         return age;
     }
@@ -79,6 +119,7 @@ public class QuestionerAnswers {
         private List<String> meansOfTravel;
         private List<String> travelPurpose;
         private List<String> destinationContinent;
+
 
         @Override
         public String toString() {

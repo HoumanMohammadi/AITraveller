@@ -52,7 +52,8 @@ public class QuestionerPageOneController {
     private final SceneSwitchService sceneSwitchService= SceneSwitchService.getInstance();
     @FXML
     private QuestionerAnswers.Builder questionerBuilder = new QuestionerAnswers.Builder("", new ArrayList<>(), "", false, "", new ArrayList<>(), "", "", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-    private List<String> coTraveller = new ArrayList<>();
+    private final List<String> coTraveller = new ArrayList<>();
+
 
     @FXML
     private void initialize() {

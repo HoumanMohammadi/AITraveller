@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/questioner")
 public class ChatGPTAPIController {
-/*
+
     private final ChatGPTClient chatGPTClient;
     //private final QuestionerAnswers.Builder questionerBuilder;
 
@@ -14,15 +14,12 @@ public class ChatGPTAPIController {
         this.chatGPTClient = chatGPTClient;
         //this.questionerBuilder = questionerBuilder;
     }
-*/
 
-/*
-    public ChatGPTResponse getTravelSuggestion(@RequestBody ChatGPTAPIRequest chatGPTAPIRequest) throws Exception {
-        return chatGPTClient.getChatSuggestion(chatGPTAPIRequest);
-    }*/
+
     @PostMapping("/questionAnswers")
-    public void getQuestionAnswers(@RequestBody QuestionerAnswers.Builder questionerBuilder) throws Exception {
-        System.out.println(questionerBuilder.toString());
+    public ChatGPTResponse getQuestionAnswers(@RequestBody QuestionerAnswers.Builder questionerBuilder) throws Exception {
+        System.out.println("questionerBuilder.toString()"+questionerBuilder.toString());
+        return chatGPTClient.getChatSuggestion(questionerBuilder.toString());
         //return questionerBuilder.toString();
     }
 }

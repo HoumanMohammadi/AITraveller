@@ -29,6 +29,7 @@ public class GetSuggestionService {
 
     private String mapToString(Object object) {
         try {
+            System.out.println("objectMapper  "+objectMapper.writeValueAsString(object));
             return objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Failed to map preference", e);
@@ -36,19 +37,20 @@ public class GetSuggestionService {
     }
 
 
-    public String getSuggestion(QuestionerAnswers.Builder questionerBuilder) {
+    public void getSuggestion(QuestionerAnswers questionerAnswers) {
         try {
-            //StudentWithoutMatriculationNumber studentDto = generateOneStudentDto();
-            String requestBody = objectMapper.writeValueAsString(questionerBuilder);
+
+            String requestBody = objectMapper.writeValueAsString(questionerAnswers);
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("http://localhost:8080/api/questioner/questionAnswers"))
                     .header("Content-Type", "application/json")
                     .header("Accept", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .build();
-            System.out.println("send Builder to backend. Builder:"+ questionerBuilder);
+            System.out.println("send Builder to backend. Builder:"+ questionerAnswers);
+            System.out.println("request body:   "+requestBody);
 
-            return httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+            httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                     .thenApply(HttpResponse::body)
                     .thenApply(this::mapToString)
                     .join();

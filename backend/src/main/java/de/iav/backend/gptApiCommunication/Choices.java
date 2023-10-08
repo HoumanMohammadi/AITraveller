@@ -1,17 +1,17 @@
 package de.iav.backend.gptApiCommunication;
 
-public class Choice {
+public class Choices {
     int index;
     Message message;
     String finish_reason;
 
-    public Choice(int index, Message message, String finish_reason) {
+    public Choices(int index, Message message, String finish_reason) {
         this.index = index;
         this.message = message;
         this.finish_reason = finish_reason;
     }
 
-    public Choice() {
+    public Choices() {
     }
 
     public int getIndex() {
