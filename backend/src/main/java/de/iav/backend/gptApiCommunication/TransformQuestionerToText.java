@@ -29,12 +29,15 @@ public class TransformQuestionerToText {
 
         if (answers.getPreferredDestination() != null){
             message += "I want to go to " + answers.getPreferredDestination();
+            message += ". please make me two different itineraries based on the infos i gave you.";
         } else {
             message += "I have no preferred destination ";
             if (answers.destinationContinent()!= null){
                 message += "but i prefer to go to "+answers.destinationContinent();
+                message += ". please suggest me two different destinations and make one itinerary for each based on the infos i gave you.";
             }
         }
+
 
         return message;
     }
