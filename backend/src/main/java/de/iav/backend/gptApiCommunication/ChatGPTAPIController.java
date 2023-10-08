@@ -20,7 +20,7 @@ public class ChatGPTAPIController {
     public ChatGPTResponse getQuestionAnswers(@RequestBody QuestionerAnswers.Builder questionerBuilder) throws Exception {
         System.out.println("questionerBuilder.toString()"+questionerBuilder.toString());
         System.out.println(questionerBuilder.build().getCoTraveller());
-        return chatGPTClient.getChatSuggestion(questionerBuilder.toString());
+        return chatGPTClient.getChatSuggestion(questionerBuilder);
         //return questionerBuilder.toString();
     }
 }

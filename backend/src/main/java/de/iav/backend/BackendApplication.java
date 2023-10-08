@@ -1,6 +1,7 @@
 package de.iav.backend;
 
 import de.iav.backend.gptApiCommunication.ChatGPTAPIRequest;
+import de.iav.backend.gptApiCommunication.TransformQuestionerToText;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -16,5 +17,7 @@ public class BackendApplication {
 	public ChatGPTAPIRequest chatGPTAPIRequest() {
 		return new ChatGPTAPIRequest();
 	}
+	@Bean
+	public TransformQuestionerToText transformQuestionerToText(){return new TransformQuestionerToText();}
 
 }

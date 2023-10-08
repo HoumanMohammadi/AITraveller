@@ -20,10 +20,11 @@ public class ChatGPTClient {
     private final WebClient webClient= WebClient.create(API_URL);
     private final Gson gson;
     private final ChatGPTAPIRequest chatGPTAPIRequest;
-    public ChatGPTResponse getChatSuggestion(String stringRequest) {
+    private final TransformQuestionerToText transformQuestionerToText;
+    public ChatGPTResponse getChatSuggestion(QuestionerAnswers.Builder questionerBuilder) {
         Message messages= new Message();
         messages.role="user";
-        messages.content= stringRequest;
+        messages.content= transformQuestionerToText.transform(questionerBuilder.build());
         List<Message> messagesList=new ArrayList<>();
         messagesList.add(messages);
         System.out.println("message list: "+ messagesList.toString());

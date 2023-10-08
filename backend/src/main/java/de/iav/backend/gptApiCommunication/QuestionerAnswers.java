@@ -14,8 +14,9 @@ public class QuestionerAnswers {
     private final List<String> meansOfTravel;
     private final List<String> travelPurpose;
     private final List<String> destinationContinent;
+    private final String preferredDestination;
 
-    private QuestionerAnswers(Builder builder) {
+    private QuestionerAnswers(Builder builder, String preferredDestination) {
         this.age = builder.age;
         this.coTraveller = builder.coTraveller;
         this.livingCity = builder.livingCity;
@@ -26,6 +27,11 @@ public class QuestionerAnswers {
         this.meansOfTravel = builder.meansOfTravel;
         this.travelPurpose = builder.travelPurpose;
         this.destinationContinent = builder.destinationContinent;
+        this.preferredDestination = builder.preferredDestination;
+    }
+
+    public String getPreferredDestination() {
+        return preferredDestination;
     }
 
     public String getAge() {
@@ -211,7 +217,7 @@ public class QuestionerAnswers {
         }
 
         public QuestionerAnswers build() {
-            return new QuestionerAnswers(this);
+            return new QuestionerAnswers(this, preferredDestination);
         }
     }
 }
