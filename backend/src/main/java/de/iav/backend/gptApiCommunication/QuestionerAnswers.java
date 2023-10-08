@@ -2,19 +2,110 @@ package de.iav.backend.gptApiCommunication;
 
 import java.util.List;
 
-public class QuestionerAnswers {
-    String age;
-    List<String> coTraveller;
-    String livingCity;
-    boolean disability;
-    int travelDuration;
-    List<String> activity;
-    String season;
-    List<String> meansOfTravel;
-    List<String> travelPurpose;
-    List<String> destinationContinent;
 
-    public QuestionerAnswers(Builder builder) {
+public class QuestionerAnswers {
+    private final String age;
+    private final List<String> coTraveller;
+    private final String livingCity;
+    private final boolean disability;
+    private final String travelDuration;
+    private final List<String> activity;
+    private final String season;
+    private final List<String> meansOfTravel;
+    private final List<String> travelPurpose;
+    private final List<String> destinationContinent;
+
+    private QuestionerAnswers(Builder builder) {
+        this.age = builder.age;
+        this.coTraveller = builder.coTraveller;
+        this.livingCity = builder.livingCity;
+        this.disability = builder.disability;
+        this.travelDuration = builder.travelDuration;
+        this.activity = builder.activity;
+        this.season = builder.season;
+        this.meansOfTravel = builder.meansOfTravel;
+        this.travelPurpose = builder.travelPurpose;
+        this.destinationContinent = builder.destinationContinent;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public List<String> getCoTraveller() {
+        return coTraveller;
+    }
+
+    public String getLivingCity() {
+        return livingCity;
+    }
+
+    public boolean isDisability() {
+        return disability;
+    }
+
+    public String getTravelDuration() {
+        return travelDuration;
+    }
+
+    public List<String> getActivity() {
+        return activity;
+    }
+
+    public String getSeason() {
+        return season;
+    }
+
+    public List<String> getMeansOfTravel() {
+        return meansOfTravel;
+    }
+
+    public List<String> getTravelPurpose() {
+        return travelPurpose;
+    }
+
+    public List<String> getDestinationContinent() {
+        return destinationContinent;
+    }
+
+    public String age() {
+        return age;
+    }
+
+    public List<String> coTraveller() {
+        return coTraveller;
+    }
+
+    public String livingCity() {
+        return livingCity;
+    }
+
+    public boolean disability() {
+        return disability;
+    }
+
+    public String travelDuration() {
+        return travelDuration;
+    }
+
+    public List<String> activity() {
+        return activity;
+    }
+
+    public String season() {
+        return season;
+    }
+
+    public List<String> meansOfTravel() {
+        return meansOfTravel;
+    }
+
+    public List<String> travelPurpose() {
+        return travelPurpose;
+    }
+
+    public List<String> destinationContinent() {
+        return destinationContinent;
     }
 
     public static class Builder {
@@ -29,6 +120,7 @@ public class QuestionerAnswers {
         private List<String> meansOfTravel;
         private List<String> travelPurpose;
         private List<String> destinationContinent;
+
 
         @Override
         public String toString() {
