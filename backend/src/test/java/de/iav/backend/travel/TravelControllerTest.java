@@ -20,10 +20,18 @@ class TravelControllerTest {
     void getTravelByUserId_whenNoTravelAvailable_thenReturnEmptyList() {
         // GIVEN
         String userId = "1";
-        List<Travel> expected = List.of();
+        List<TravelWithoutIdDTO> expected = List.of();
         // WHEN
-        when(travelRepository.findTravelsByUser_Id(userId)).thenReturn(expected);
-        List<Travel> actual = travelService.getTravelByUserId(userId);
+        when(travelRepository.findTravelsByUser_Id(userId)
+                .stream()
+                .map(travel -> TravelWithoutIdDTO.builder()
+                        .questionerAnswers(travel.questionerAnswers)
+                        .travelSuggestion(travel.travelSuggestion)
+                        .localDateTime(travel.localDateTime)
+                        .user(travel.user)
+                        .build())
+                .toList()).thenReturn(expected);
+        List<TravelWithoutIdDTO> actual = travelService.getTravelByUserId(userId);
         // THEN
         assertEquals(expected, actual);
         verify(travelRepository).findTravelsByUser_Id(userId);

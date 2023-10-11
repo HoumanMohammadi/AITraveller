@@ -13,14 +13,39 @@ import java.util.Optional;
 public class TravelService {
 
     private final TravelRepository travelRepository;
-    public List<Travel> getAllTravels(){
-        return travelRepository.findAll();
+    public List<TravelWithoutIdDTO> getAllTravels(){
+        return travelRepository.findAll()
+                .stream()
+                .map(travel -> TravelWithoutIdDTO.builder()
+                        .questionerAnswers(travel.questionerAnswers)
+                        .travelSuggestion(travel.travelSuggestion)
+                        .localDateTime(travel.localDateTime)
+                        .user(travel.user)
+                        .build())
+                .toList();
     }
-    public List<Travel> getTravelByUserId(String id){
-        return travelRepository.findTravelsByUser_Id(id);
+
+    public List<TravelWithoutIdDTO> getTravelByUserId(String id){
+        return travelRepository.findTravelsByUser_Id(id)
+                .stream()
+                .map(travel -> TravelWithoutIdDTO.builder()
+                        .questionerAnswers(travel.questionerAnswers)
+                        .travelSuggestion(travel.travelSuggestion)
+                        .localDateTime(travel.localDateTime)
+                        .user(travel.user)
+                        .build())
+                .toList();
     }
-    public Travel getAllTravelByUser(Optional<User> user) {
-        return travelRepository.findTravelByUser(user);
+    public List<TravelWithoutIdDTO> getAllTravelsByUser(Optional<User> user) {
+        return travelRepository.findTravelByUser(user)
+                .stream()
+                .map(travel -> TravelWithoutIdDTO.builder()
+                        .questionerAnswers(travel.questionerAnswers)
+                        .travelSuggestion(travel.travelSuggestion)
+                        .localDateTime(travel.localDateTime)
+                        .user(travel.user)
+                        .build())
+                .toList();
     }
     public TravelWithoutIdDTO saveTravel(NewTravelDTO newTravelDTO) {
         Travel travel = Travel.builder()
@@ -40,11 +65,12 @@ public class TravelService {
     }
 
     public void deleteTravelById(String id){
-        travelRepository.deleteById(id);
+        Travel travelToDelete = travelRepository
+                .findTravelById(id)
+                .orElseThrow(()-> new TravelNotFoundException(id));
+        travelRepository.delete(travelToDelete);
     }
-    public void deleteTravel(Travel travel){
-        travelRepository.delete(travel);
-    }
+
     public Travel updateTravel(String id, Travel travelToUpdate) {
         travelRepository.findById(id).orElseThrow(() -> new TravelNotFoundException(id));
         Travel updatedTravel = travelToUpdate.withId(id);

@@ -16,7 +16,7 @@ public class TravelController {
     }
 
     @GetMapping("/{id}")
-    public List<Travel> getAllTravelsById(@PathVariable String id){
+    public List<TravelWithoutIdDTO> getAllTravelsById(@PathVariable String id){
         return travelService.getTravelByUserId(id);
     }
 
