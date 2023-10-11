@@ -4,19 +4,19 @@ import java.util.List;
 
 
 public class QuestionerAnswers {
-    private final String age;
-    private final List<String> coTraveller;
-    private final String livingCity;
-    private final boolean disability;
-    private final String travelDuration;
-    private final List<String> activity;
-    private final String season;
-    private final List<String> meansOfTravel;
-    private final List<String> travelPurpose;
-    private final List<String> destinationContinent;
-    private final String preferredDestination;
+    private String age;
+    private List<String> coTraveller;
+    private String livingCity;
+    private boolean disability;
+    private String travelDuration;
+    private List<String> activity;
+    private String season;
+    private List<String> meansOfTravel;
+    private List<String> travelPurpose;
+    private List<String> destinationContinent;
+    private String preferredDestination;
 
-    private QuestionerAnswers(Builder builder, String preferredDestination) {
+    public QuestionerAnswers(Builder builder, String preferredDestination) {
         this.age = builder.age;
         this.coTraveller = builder.coTraveller;
         this.livingCity = builder.livingCity;
@@ -28,6 +28,10 @@ public class QuestionerAnswers {
         this.travelPurpose = builder.travelPurpose;
         this.destinationContinent = builder.destinationContinent;
         this.preferredDestination = builder.preferredDestination;
+    }
+
+    public QuestionerAnswers() {
+
     }
 
     public String getPreferredDestination() {

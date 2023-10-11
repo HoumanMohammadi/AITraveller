@@ -37,8 +37,8 @@ public class TransformQuestionerToText {
                 message += ". please suggest me two different destinations and make one itinerary for each based on the infos i gave you.";
             }
         }
-
-
+/*        message += "\n please give me your response in the following format:" +
+                "\n ";*/
         return message;
     }
 }

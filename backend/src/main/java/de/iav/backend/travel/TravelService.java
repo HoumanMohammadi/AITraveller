@@ -2,7 +2,6 @@ package de.iav.backend.travel;
 
 import de.iav.backend.exception.TravelNotFoundException;
 import de.iav.backend.user.User;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +16,29 @@ public class TravelService {
     public List<Travel> getAllTravels(){
         return travelRepository.findAll();
     }
-    public Optional<Travel> getTravelById(String id){
-        return travelRepository.findById(id);
+    public List<Travel> getTravelByUserId(String id){
+        return travelRepository.findTravelsByUser_Id(id);
     }
-    public Optional<Travel> getAllTravelByUser(Optional<User> user) {
+    public Travel getAllTravelByUser(Optional<User> user) {
         return travelRepository.findTravelByUser(user);
     }
-    public void saveTravel(Travel travelToSave){
-        travelRepository.save(travelToSave);
+    public TravelWithoutIdDTO saveTravel(NewTravelDTO newTravelDTO) {
+        Travel travel = Travel.builder()
+                .questionerAnswers(newTravelDTO.questionerAnswers)
+                .travelSuggestion(newTravelDTO.travelSuggestion)
+                .localDateTime(newTravelDTO.localDateTime)
+                .user(newTravelDTO.user)
+                .build();
+        Travel travelToSave = travelRepository.save(travel);
+
+        return TravelWithoutIdDTO.builder()
+                .questionerAnswers(travelToSave.questionerAnswers)
+                .travelSuggestion(travelToSave.travelSuggestion)
+                .localDateTime(travelToSave.localDateTime)
+                .user(travelToSave.user)
+                .build();
     }
+
     public void deleteTravelById(String id){
         travelRepository.deleteById(id);
     }

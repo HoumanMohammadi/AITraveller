@@ -15,7 +15,7 @@ import java.util.Properties;
 
 @Service
 @RequiredArgsConstructor
-public class ChatGPTClient {
+public class ChatGPTService {
     private static final String API_URL = "https://api.openai.com/v1/chat/completions"; // Example API URL
     private final WebClient webClient= WebClient.create(API_URL);
     private final Gson gson;
