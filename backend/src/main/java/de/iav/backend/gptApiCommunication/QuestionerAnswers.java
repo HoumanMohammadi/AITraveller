@@ -4,7 +4,7 @@ import java.util.List;
 
 
 public class QuestionerAnswers {
-    private String age;
+    private int age;
     private List<String> coTraveller;
     private String livingCity;
     private boolean disability;
@@ -38,7 +38,7 @@ public class QuestionerAnswers {
         return preferredDestination;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
@@ -78,7 +78,7 @@ public class QuestionerAnswers {
         return destinationContinent;
     }
 
-    public String age() {
+    public int age() {
         return age;
     }
 
@@ -119,7 +119,7 @@ public class QuestionerAnswers {
     }
 
     public static class Builder {
-        private String age;
+        private int age;
         public List<String> coTraveller;
         private  String livingCity;
         private  boolean disability;
@@ -149,7 +149,7 @@ public class QuestionerAnswers {
                     '}';
         }
 
-        public Builder(String age, List<String> coTraveller, String livingCity, boolean disability, String travelDuration, List<String> activity, String season, String preferredDestination, List<String> meansOfTravel, List<String> travelPurpose, List<String> destinationContinent) {
+        public Builder(int age, List<String> coTraveller, String livingCity, boolean disability, String travelDuration, List<String> activity, String season, String preferredDestination, List<String> meansOfTravel, List<String> travelPurpose, List<String> destinationContinent) {
             this.age = age;
             this.coTraveller = coTraveller;
             this.livingCity = livingCity;
@@ -195,7 +195,7 @@ public class QuestionerAnswers {
             return this;
         }
 
-        public Builder age(String age){
+        public Builder age(int age){
             this.age=age;
             return this;
         }

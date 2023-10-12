@@ -11,18 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDateTime;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -85,29 +81,53 @@ class TravelControllerTest {
                         .content(jsonRequest))
                 .andExpect(status().isBadRequest()); // Assuming you return HTTP 400 on bad request
     }
-    /*@Test
-    void createTravel_shouldReturnInternalServerErrorOnException() throws Exception {
+    @Test
+    @DirtiesContext
+    void createTravel_thenExpectStatusOKAndReturnTravelAsJSON() throws Exception {
         // Create a NewTravelDTO and set necessary values
-        NewTravelDTO newTravel = new NewTravelDTO();
-        newTravel.setTravelSuggestion("Some suggestion");  // Set a non-null value for travel suggestion
-        newTravel.setUser(new User());  // Set a non-null value for user
-
-        // Convert the travel object to JSON
-        String jsonRequest = objectMapper.writeValueAsString(newTravel);
-
-        when(travelService.saveTravel(any())).thenThrow(new Exception("Something went wrong"));
-
-        // Send a POST request with the JSON payload
-        mockMvc.perform(post(BASE_URL)
-                        .contentType("application/json")
-                        .content(jsonRequest))
-                .andExpect(status().isInternalServerError());
+        mockMvc.perform(MockMvcRequestBuilders.post(BASE_URL).
+                contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                        {
+                            "travelSuggestion": "berlin",
+                            "user": {
+                                "id": "userId",
+                                "firstName": "Houman",
+                                "lastName": "Mo",
+                                "email": "houmane.el",
+                                "password": "password",
+                                "role": "user"
+                            },
+                            "questionerAnswers": {
+                                "age": 22
+                            }
+                        }
+                        """
+                ))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.content().json(
+                        """
+                        {
+                            "travelSuggestion": "berlin",
+                            "user": {
+                                "id": "userId",
+                                "firstName": "Houman",
+                                "lastName": "Mo",
+                                "email": "houmane.el",
+                                "password": "password",
+                                "role": "user"
+                            },
+                            "questionerAnswers": {
+                                "age": 22
+                            }
+                        }
+                        """
+                ));
     }
 
 
-*/
-
     @Test
+    @DirtiesContext
     void updateTravel() {
     }
 
