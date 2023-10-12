@@ -1,71 +1,62 @@
 package de.iav.backend.travel;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import de.iav.backend.gptApiCommunication.QuestionerAnswers;
 import de.iav.backend.user.User;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@SpringBootTest
+@AutoConfigureMockMvc
 class TravelControllerTest {
 
-    private final TravelRepository travelRepository = mock(TravelRepository.class);
-    private final TravelService travelService= new TravelService(travelRepository);
+    @Autowired
+    private MockMvc mockMvc;
+    private final static String BASE_URL = "/api/aitraveller/travels";
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    QuestionerAnswers questionerAnswers = new QuestionerAnswers();
+    LocalDateTime localDateTime = LocalDateTime.now();
+    User user = new User("userId", "username","lastname", "email", "password", "role");
+    NewTravelDTO newTravelDTO1 = new NewTravelDTO("Berlin",user, localDateTime, questionerAnswers);
+    NewTravelDTO newTravelDTO2 = new NewTravelDTO("Munich",user, localDateTime, questionerAnswers);
 
-    @Test
-    void getTravelByUserId_whenNoTravelAvailable_thenReturnEmptyList() {
-        // GIVEN
-        String userId = "1";
-        List<TravelWithoutIdDTO> expected = List.of();
-        // WHEN
-        when(travelRepository.findTravelsByUser_Id(userId)
-                .stream()
-                .map(travel -> TravelWithoutIdDTO.builder()
-                        .questionerAnswers(travel.questionerAnswers)
-                        .travelSuggestion(travel.travelSuggestion)
-                        .localDateTime(travel.localDateTime)
-                        .user(travel.user)
-                        .build())
-                .toList()).thenReturn(expected);
-        List<TravelWithoutIdDTO> actual = travelService.getTravelByUserId(userId);
-        // THEN
-        assertEquals(expected, actual);
-        verify(travelRepository).findTravelsByUser_Id(userId);
+    @BeforeEach
+    void insertTestTravels() throws Exception{
+        mockMvc.perform(post(BASE_URL)
+                .contentType("application.json")
+                .content(objectMapper.writeValueAsString(newTravelDTO1))
+        );
+        mockMvc.perform(post(BASE_URL)
+                .contentType("application.json")
+                .content(objectMapper.writeValueAsString(newTravelDTO2))
+        );
     }
 
     @Test
-    void createTravel_whenCalled_thenSaveAndReturnTravel() {
-        // GIVEN
-        QuestionerAnswers questionerAnswers = new QuestionerAnswers();
-        LocalDateTime localDateTime = LocalDateTime.now();
-        User user = new User("userId", "username","lastname", "email", "password", "role");
-        NewTravelDTO newTravelDTO = new NewTravelDTO("123",user, localDateTime, questionerAnswers);
-        Travel savedTravel = new Travel(
-                "generatedId",
-                "123",
-                user,
-                localDateTime,
-                questionerAnswers
-        );
-        when(travelRepository.save(any(Travel.class))).thenReturn(savedTravel);
+    void getAllTravelsByUserId_shouldReturnTwoEntry_whenTwoFittingEntriesExists() throws Exception  {
+        mockMvc.perform(get(BASE_URL + "/"+ user.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("[0].destination").value("Berlin"))
+                .andExpect(jsonPath("[1].destination").value("Munich"));
+    }
 
-        // WHEN
-
-        TravelWithoutIdDTO actual=travelService.saveTravel(newTravelDTO);
-        // THEN
-        TravelWithoutIdDTO expected = new TravelWithoutIdDTO(
-                "123",
-                user,
-                localDateTime,
-                questionerAnswers
-        );
-
-        assertEquals(expected, actual);
-        verify(travelRepository).save(any(Travel.class));
+    @Test
+    void createTravel() {
     }
 
     @Test

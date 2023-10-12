@@ -15,9 +15,9 @@ public class TravelController {
         this.travelService = travelService;
     }
 
-    @GetMapping("/{id}")
-    public List<TravelWithoutIdDTO> getAllTravelsById(@PathVariable String id){
-        return travelService.getTravelByUserId(id);
+    @GetMapping("/{userId}")
+    public List<TravelWithoutIdDTO> getAllTravelsByUserId(@PathVariable String userId){
+        return travelService.getTravelByUserId(userId);
     }
 
     @PostMapping
