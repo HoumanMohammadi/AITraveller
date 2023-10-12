@@ -1,5 +1,8 @@
 package de.iav.backend.travel;
 
+import de.iav.backend.exception.InvalidRequestException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,10 +29,16 @@ public class TravelController {
     }
 
     @PostMapping
-    public TravelWithoutIdDTO createTravel(@RequestBody NewTravelDTO newTravelDTO) {
-        //APIResponse apiResponse= chatGPTClient.getChatSuggestion(apiRequest);
-        return travelService.saveTravel(newTravelDTO);
+    public ResponseEntity<TravelWithoutIdDTO> createTravel(@RequestBody NewTravelDTO newTravelDTO) {
+        try {
+            TravelWithoutIdDTO createdTravel = travelService.saveTravel(newTravelDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdTravel);
+        } catch (InvalidRequestException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
+
+
 
     @PutMapping("/{id}")
     public TravelWithoutIdDTO updateTravel(@PathVariable String id, @RequestBody NewTravelDTO newTravelDTO){

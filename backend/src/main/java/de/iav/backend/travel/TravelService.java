@@ -1,5 +1,6 @@
 package de.iav.backend.travel;
 
+import de.iav.backend.exception.InvalidRequestException;
 import de.iav.backend.exception.TravelNotFoundException;
 import de.iav.backend.user.User;
 import lombok.NoArgsConstructor;
@@ -51,20 +52,30 @@ public class TravelService {
                 .toList();
     }
     public TravelWithoutIdDTO saveTravel(NewTravelDTO newTravelDTO) {
-        Travel travel = Travel.builder()
-                .questionerAnswers(newTravelDTO.questionerAnswers)
-                .travelSuggestion(newTravelDTO.travelSuggestion)
-                .localDateTime(newTravelDTO.localDateTime)
-                .user(newTravelDTO.user)
-                .build();
-        Travel travelToSave = travelRepository.save(travel);
 
-        return TravelWithoutIdDTO.builder()
-                .questionerAnswers(travelToSave.questionerAnswers)
-                .travelSuggestion(travelToSave.travelSuggestion)
-                .localDateTime(travelToSave.localDateTime)
-                .user(travelToSave.user)
-                .build();
+        if (isValid(newTravelDTO)) {
+            Travel travel = Travel.builder()
+                    .questionerAnswers(newTravelDTO.questionerAnswers)
+                    .travelSuggestion(newTravelDTO.travelSuggestion)
+                    .localDateTime(newTravelDTO.localDateTime)
+                    .user(newTravelDTO.user)
+                    .build();
+            Travel travelToSave = travelRepository.save(travel);
+
+            return TravelWithoutIdDTO.builder()
+                    .questionerAnswers(travelToSave.questionerAnswers)
+                    .travelSuggestion(travelToSave.travelSuggestion)
+                    .localDateTime(travelToSave.localDateTime)
+                    .user(travelToSave.user)
+                    .build();
+        } else {
+            throw new InvalidRequestException("Invalid request for saving travel.");
+        }
+    }
+
+    public boolean isValid(NewTravelDTO newTravelDTO) {
+        return newTravelDTO.getTravelSuggestion() != null
+                && newTravelDTO.getUser() != null;
     }
 
     public void deleteTravelById(String id){
