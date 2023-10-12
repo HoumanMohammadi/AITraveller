@@ -25,8 +25,5 @@ public interface TravelRepository extends MongoRepository<Travel, String> {
 
     Optional<Travel> findTravelById(String id);
 
-    Optional<Travel> updateTravelById(String id);
-
-
     }
 

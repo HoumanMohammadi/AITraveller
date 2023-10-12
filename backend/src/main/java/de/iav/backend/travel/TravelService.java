@@ -13,10 +13,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TravelService {
 
-    private TravelRepository travelRepository;
-
-    public TravelService(TravelRepository travelRepository) {
-    }
+    private final TravelRepository travelRepository;
 
 
     public List<TravelWithoutIdDTO> getAllTravels(){
