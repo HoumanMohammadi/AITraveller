@@ -27,8 +27,8 @@ public class TravelController {
     }
 
     @PutMapping("/{id}")
-    public Travel updateTravel(@PathVariable String id, @RequestBody Travel travel){
-        return travelService.updateTravel(id, travel);
+    public TravelWithoutIdDTO updateTravel(@PathVariable String id, @RequestBody NewTravelDTO newTravelDTO){
+        return travelService.updateTravel(id, newTravelDTO);
     }
 
     @DeleteMapping("/{id}")

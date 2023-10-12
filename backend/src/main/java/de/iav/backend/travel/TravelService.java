@@ -71,9 +71,23 @@ public class TravelService {
         travelRepository.delete(travelToDelete);
     }
 
-    public Travel updateTravel(String id, Travel travelToUpdate) {
-        travelRepository.findById(id).orElseThrow(() -> new TravelNotFoundException(id));
-        Travel updatedTravel = travelToUpdate.withId(id);
-        return travelRepository.save(updatedTravel);
+    public TravelWithoutIdDTO updateTravel(String id, NewTravelDTO updateTravelDto) {
+        Travel travel= travelRepository
+                .findTravelById(id)
+                        .orElseThrow(()-> new TravelNotFoundException(id));
+
+        travel.setTravelSuggestion(updateTravelDto.travelSuggestion);
+        travel.setUser(updateTravelDto.user);
+        travel.setQuestionerAnswers(updateTravelDto.questionerAnswers);
+        travel.setLocalDateTime(updateTravelDto.localDateTime);
+
+        Travel savedTravel = travelRepository.save(travel);
+
+        return TravelWithoutIdDTO.builder()
+                .travelSuggestion(savedTravel.travelSuggestion)
+                .questionerAnswers(savedTravel.questionerAnswers)
+                .localDateTime(savedTravel.localDateTime)
+                .user(savedTravel.user)
+                .build();
     }
 }
