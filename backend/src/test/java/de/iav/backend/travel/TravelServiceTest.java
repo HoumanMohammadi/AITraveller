@@ -43,7 +43,14 @@ class TravelServiceTest {
         QuestionerAnswers questionerAnswers = new QuestionerAnswers();
         LocalDateTime localDateTime = LocalDateTime.now();
         User user = new User("userId", "username","lastname", "email", "password", "role");
-        NewTravelDTO newTravelDTO = new NewTravelDTO("123",user, localDateTime, questionerAnswers);
+        NewTravelDTO newTravelDTO = new NewTravelDTO("123", user, localDateTime, questionerAnswers);
+
+        TravelWithoutIdDTO expected = new TravelWithoutIdDTO(
+                "123",
+                user,
+                localDateTime,
+                questionerAnswers
+        );
 
         Travel savedTravel = new Travel(
                 "generatedId",
@@ -53,25 +60,19 @@ class TravelServiceTest {
                 questionerAnswers
         );
 
-        TravelWithoutIdDTO expected = new TravelWithoutIdDTO(
-                "123",
-                user,
-                localDateTime,
-                questionerAnswers
-        );
-
         when(travelRepository.save(any(Travel.class))).thenReturn(savedTravel);
 
         // WHEN
-        TravelWithoutIdDTO actual = new TravelWithoutIdDTO(travelService.saveTravel(newTravelDTO).travelSuggestion
-        ,travelService.saveTravel(newTravelDTO).user
-        ,travelService.saveTravel(newTravelDTO).localDateTime
-        ,travelService.saveTravel(newTravelDTO).questionerAnswers);
+        Travel actual = travelService.saveTravel(newTravelDTO);
 
         // THEN
-        assertEquals(expected, actual);
+        assertEquals(expected.localDateTime, actual.localDateTime);
+        assertEquals(expected.user, actual.user);
+        assertEquals(expected.travelSuggestion, actual.travelSuggestion);
+        assertEquals(expected.questionerAnswers, actual.questionerAnswers);
         verify(travelRepository).save(any(Travel.class));
     }
+
 
     @Test
     void deleteTravel() {
