@@ -12,14 +12,6 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class BackendApplication {
 
-	@Bean
-	public ObjectMapper objectMapper() {
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.registerModule(new JavaTimeModule());
-		System.out.println("JavaTimeModule registered!");
-		return mapper;
-	}
-
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);

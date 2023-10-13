@@ -24,4 +24,19 @@ public class TravelWithoutIdDTO{
             return new Travel(this.travelSuggestion, this.user, this.localDateTime, this.questionerAnswers);
         }
 
+        public String getTravelSuggestion() {
+                return travelSuggestion;
+        }
+
+        public User getUser() {
+                return user;
+        }
+
+        public LocalDateTime getLocalDateTime() {
+                return localDateTime;
+        }
+
+        public QuestionerAnswers getQuestionerAnswers() {
+                return questionerAnswers;
+        }
 }

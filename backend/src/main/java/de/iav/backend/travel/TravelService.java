@@ -51,7 +51,7 @@ public class TravelService {
                         .build())
                 .toList();
     }
-    public TravelWithoutIdDTO saveTravel(NewTravelDTO newTravelDTO) {
+    public Travel saveTravel(NewTravelDTO newTravelDTO) {
 
         if (isValid(newTravelDTO)) {
             Travel travel = Travel.builder()
@@ -60,14 +60,8 @@ public class TravelService {
                     .localDateTime(newTravelDTO.localDateTime)
                     .user(newTravelDTO.user)
                     .build();
-            Travel travelToSave = travelRepository.save(travel);
 
-            return TravelWithoutIdDTO.builder()
-                    .questionerAnswers(travelToSave.questionerAnswers)
-                    .travelSuggestion(travelToSave.travelSuggestion)
-                    .localDateTime(travelToSave.localDateTime)
-                    .user(travelToSave.user)
-                    .build();
+            return travelRepository.save(travel);
         } else {
             throw new InvalidRequestException("Invalid request for saving travel.");
         }

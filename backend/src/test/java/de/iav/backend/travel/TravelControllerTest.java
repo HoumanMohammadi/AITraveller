@@ -1,7 +1,6 @@
 package de.iav.backend.travel;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import de.iav.backend.gptApiCommunication.QuestionerAnswers;
 import de.iav.backend.user.User;
 
@@ -20,9 +19,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.time.LocalDateTime;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @SpringBootTest
 @AutoConfigureMockMvc
 class TravelControllerTest {
@@ -45,7 +45,7 @@ class TravelControllerTest {
 
     @BeforeEach
     void setUp() {
-        travelRepository.deleteAll(); // Clear the repository before each test
+        travelRepository.deleteAll();
     }
 
 
@@ -69,17 +69,14 @@ class TravelControllerTest {
 
     @Test
     void createTravel_shouldReturnBadRequestOnInvalidRequest() throws Exception {
-        // Create an invalid travel object (e.g., missing required fields)
         NewTravelDTO invalidTravel = new NewTravelDTO();
 
-        // Convert the invalid travel object to JSON
         String jsonRequest = objectMapper.writeValueAsString(invalidTravel);
 
-        // Send a POST request with the invalid JSON payload
         mockMvc.perform(post(BASE_URL)
                         .contentType("application/json")
                         .content(jsonRequest))
-                .andExpect(status().isBadRequest()); // Assuming you return HTTP 400 on bad request
+                .andExpect(status().isBadRequest());
     }
     @Test
     @DirtiesContext
@@ -125,13 +122,76 @@ class TravelControllerTest {
                 ));
     }
 
-
     @Test
     @DirtiesContext
-    void updateTravel() {
+    void updateTravel_shouldReturn404_whenStudentDoesntExist() throws Exception {
+        String THIS_ID_DOES_NOT_EXIST = "THIS_ID_DOES_NOT_EXIST";
+        String travelThatDoesNotExist = """
+        {
+            "travelSuggestion": "Updated Berlin",
+            "user": {
+                "id": "userId",
+                "firstName": "Houman",
+                "lastName": "Mo",
+                "email": "houmane.el",
+                "password": "password",
+                "role": "user"
+            },
+            "questionerAnswers": {
+                "age": 22
+            }
+        }
+        """;
+
+        mockMvc.perform(put(BASE_URL+"/"+THIS_ID_DOES_NOT_EXIST)
+                .contentType("application/json")
+                        .content(travelThatDoesNotExist))
+                .andExpect(status().isNotFound());
     }
 
     @Test
-    void deleteTravel() {
+    @DirtiesContext
+    void updateTravel_shouldReturnNotFoundForInvalidId() throws Exception {
+
+        String jsonRequest = """
+        {
+            "travelSuggestion": "Updated Berlin",
+            "user": {
+                "id": "userId",
+                "firstName": "Houman",
+                "lastName": "Mo",
+                "email": "houmane.el",
+                "password": "password",
+                "role": "user"
+            },
+            "questionerAnswers": {
+                "age": 22
+            }
+        }
+        """;
+
+
+        mockMvc.perform(MockMvcRequestBuilders.put(BASE_URL + "/invalidId")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonRequest))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+    @Test
+    @DirtiesContext
+    void deleteTravel_shouldReturnNotFoundForInvalidId() throws Exception {
+
+        mockMvc.perform(MockMvcRequestBuilders.delete(BASE_URL + "/invalidId"))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    @Test
+    @DirtiesContext
+    void deleteTravel_shouldReturnSuccessForValidId() throws Exception {
+
+        Travel createdTravel = travelService.saveTravel(newTravelDTO1);
+
+        mockMvc.perform(MockMvcRequestBuilders.delete(BASE_URL + "/" + createdTravel.getId()))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string("Travel with id " + createdTravel.getId() + " deleted successfully"));
     }
 }

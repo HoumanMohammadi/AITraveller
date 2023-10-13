@@ -44,6 +44,7 @@ class TravelServiceTest {
         LocalDateTime localDateTime = LocalDateTime.now();
         User user = new User("userId", "username","lastname", "email", "password", "role");
         NewTravelDTO newTravelDTO = new NewTravelDTO("123",user, localDateTime, questionerAnswers);
+
         Travel savedTravel = new Travel(
                 "generatedId",
                 "123",
@@ -51,55 +52,26 @@ class TravelServiceTest {
                 localDateTime,
                 questionerAnswers
         );
+
+        TravelWithoutIdDTO expected = new TravelWithoutIdDTO(
+                "123",
+                user,
+                localDateTime,
+                questionerAnswers
+        );
+
         when(travelRepository.save(any(Travel.class))).thenReturn(savedTravel);
 
         // WHEN
+        TravelWithoutIdDTO actual = new TravelWithoutIdDTO(travelService.saveTravel(newTravelDTO).travelSuggestion
+        ,travelService.saveTravel(newTravelDTO).user
+        ,travelService.saveTravel(newTravelDTO).localDateTime
+        ,travelService.saveTravel(newTravelDTO).questionerAnswers);
 
-        TravelWithoutIdDTO actual=travelService.saveTravel(newTravelDTO);
         // THEN
-        TravelWithoutIdDTO expected = new TravelWithoutIdDTO(
-                "123",
-                user,
-                localDateTime,
-                questionerAnswers
-        );
-
         assertEquals(expected, actual);
         verify(travelRepository).save(any(Travel.class));
     }
-
-    @Test
-    void updateTravel_whenTravelExist_thenUpdateAndReturnTravel() {
-        /*QuestionerAnswers questionerAnswers = new QuestionerAnswers();
-        LocalDateTime localDateTime = LocalDateTime.now();
-        User user = new User("userId", "username","lastname", "email", "password", "role");
-        NewTravelDTO newTravelDTO = new NewTravelDTO("123",user, localDateTime, questionerAnswers);
-        Travel travelToUpdate = new Travel(
-                "generatedId",
-                "123",
-                user,
-                localDateTime,
-                questionerAnswers
-        );
-        TravelWithoutIdDTO expected = new TravelWithoutIdDTO(
-                "123",
-                user,
-                localDateTime,
-                questionerAnswers
-        );
-
-
-        // WHEN
-        when(travelRepository.updateTravelById("generatedId")).thenReturn(Optional.of(travelToUpdate));
-
-        TravelWithoutIdDTO actual = travelService.updateTravel("generatedId", newTravelDTO);
-        // THEN
-
-
-        assertEquals(expected, actual);
-        verify(travelRepository).save(any(Travel.class));*/
-    }
-
 
     @Test
     void deleteTravel() {
