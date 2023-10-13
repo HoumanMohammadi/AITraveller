@@ -121,6 +121,21 @@ class TravelControllerTest {
                         """
                 ));
     }
+    @Test
+    @DirtiesContext
+    void updateTravel_shouldReturnSuccessForValidId() throws Exception {
+        // Create a valid NewTravelDTO
+        NewTravelDTO validTravel = new NewTravelDTO("Berlin", user, localDateTime, questionerAnswers);
+        Travel createdTravel = travelService.saveTravel(validTravel);
+
+        String jsonRequest = objectMapper.writeValueAsString(validTravel);
+
+        mockMvc.perform(put(BASE_URL + "/{id}", createdTravel.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonRequest))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.travelSuggestion").value(validTravel.travelSuggestion));
+    }
 
     @Test
     @DirtiesContext
