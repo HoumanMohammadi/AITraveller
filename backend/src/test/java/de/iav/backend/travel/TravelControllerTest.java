@@ -35,7 +35,8 @@ class TravelControllerTest {
     private TravelService travelService;
 
     private final static String BASE_URL = "/api/aitraveller/travels";
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    @Autowired
+    private ObjectMapper objectMapper;
 
     QuestionerAnswers questionerAnswers = new QuestionerAnswers();
     LocalDateTime localDateTime = LocalDateTime.now();
@@ -125,16 +126,20 @@ class TravelControllerTest {
     @DirtiesContext
     void updateTravel_shouldReturnSuccessForValidId() throws Exception {
         // Create a valid NewTravelDTO
-        NewTravelDTO validTravel = new NewTravelDTO("Berlin", user, localDateTime, questionerAnswers);
-        Travel createdTravel = travelService.saveTravel(validTravel);
 
-        String jsonRequest = objectMapper.writeValueAsString(validTravel);
+        Travel createdTravel = travelService.saveTravel(newTravelDTO1);
 
-        mockMvc.perform(put(BASE_URL + "/{id}", createdTravel.getId())
+        String jsonRequest = objectMapper.writeValueAsString(newTravelDTO1);
+
+        System.out.println(jsonRequest);
+        System.out.println(createdTravel.getId());
+
+
+        mockMvc.perform(put(BASE_URL + "/"+ createdTravel.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonRequest))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.travelSuggestion").value(validTravel.travelSuggestion));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.travelSuggestion").value(newTravelDTO1.travelSuggestion));
     }
 
     @Test

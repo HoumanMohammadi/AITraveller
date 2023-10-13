@@ -27,18 +27,8 @@ public class User {
 
 
     public User withId(String newId) {
-        //return new User(newId, this.firstName, this.lastName, this.email, this.password, this.portfolio, this.moneyAccount);
         return new User(newId, this.firstName, this.lastName, this.email, this.password, this.role);
-
     }
 
-    /*
-        public NewAppUser getNewAppUser() {
-                    return new NewAppUser(null, this.firstName, this.lastName, this.email, this.password);
-        }
-    */
-    public UserWithoutUserDetails getUserWithoutUserDetails() {
-        return new UserWithoutUserDetails(this.getId(), this.getFirstName(), this.getLastName(), this.getEmail(), this.getRole());
-    }
 
 }

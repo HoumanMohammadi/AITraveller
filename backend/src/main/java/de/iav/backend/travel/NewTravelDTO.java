@@ -17,6 +17,12 @@ public class NewTravelDTO {
     LocalDateTime localDateTime;
     QuestionerAnswers questionerAnswers;
 
+    public NewTravelDTO(String travelSuggestion, LocalDateTime localDateTime, QuestionerAnswers questionerAnswers) {
+        this.travelSuggestion = travelSuggestion;
+        this.localDateTime = localDateTime;
+        this.questionerAnswers = questionerAnswers;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
