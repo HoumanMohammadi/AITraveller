@@ -4,7 +4,7 @@ import java.util.List;
 
 
 public class QuestionerAnswers {
-    private String age;
+    private int age;
     private List<String> coTraveller;
     private String livingCity;
     private boolean disability;
@@ -38,7 +38,7 @@ public class QuestionerAnswers {
         return preferredDestination;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
@@ -66,51 +66,7 @@ public class QuestionerAnswers {
         return season;
     }
 
-    public List<String> getMeansOfTravel() {
-        return meansOfTravel;
-    }
-
     public List<String> getTravelPurpose() {
-        return travelPurpose;
-    }
-
-    public List<String> getDestinationContinent() {
-        return destinationContinent;
-    }
-
-    public String age() {
-        return age;
-    }
-
-    public List<String> coTraveller() {
-        return coTraveller;
-    }
-
-    public String livingCity() {
-        return livingCity;
-    }
-
-    public boolean disability() {
-        return disability;
-    }
-
-    public String travelDuration() {
-        return travelDuration;
-    }
-
-    public List<String> activity() {
-        return activity;
-    }
-
-    public String season() {
-        return season;
-    }
-
-    public List<String> meansOfTravel() {
-        return meansOfTravel;
-    }
-
-    public List<String> travelPurpose() {
         return travelPurpose;
     }
 
@@ -119,7 +75,7 @@ public class QuestionerAnswers {
     }
 
     public static class Builder {
-        private String age;
+        private int age;
         public List<String> coTraveller;
         private  String livingCity;
         private  boolean disability;
@@ -147,77 +103,6 @@ public class QuestionerAnswers {
                     ", destinationContinent=" + destinationContinent +
                     ", preferredDestination=" + preferredDestination +
                     '}';
-        }
-
-        public Builder(String age, List<String> coTraveller, String livingCity, boolean disability, String travelDuration, List<String> activity, String season, String preferredDestination, List<String> meansOfTravel, List<String> travelPurpose, List<String> destinationContinent) {
-            this.age = age;
-            this.coTraveller = coTraveller;
-            this.livingCity = livingCity;
-            this.disability = disability;
-            this.travelDuration = travelDuration;
-            this.activity = activity;
-            this.season = season;
-            this.preferredDestination = preferredDestination;
-            this.meansOfTravel = meansOfTravel;
-            this.travelPurpose = travelPurpose;
-            this.destinationContinent = destinationContinent;
-        }
-
-
-
-        public Builder livingCity(String livingCity) {
-            this.livingCity = livingCity;
-            return this;
-        }
-
-        public Builder preferredDestination(String preferredDestination) {
-            this.preferredDestination = preferredDestination;
-            return this;
-        }
-
-        public Builder disability(boolean disability) {
-            this.disability = disability;
-            return this;
-        }
-
-        public Builder travelDuration(String travelDuration) {
-            this.travelDuration = travelDuration;
-            return this;
-        }
-
-        public Builder activity(List<String> activity) {
-            this.activity = activity;
-            return this;
-        }
-
-        public Builder coTraveller(List<String> coTraveller) {
-            this.coTraveller = coTraveller;
-            return this;
-        }
-
-        public Builder age(String age){
-            this.age=age;
-            return this;
-        }
-
-        public Builder season(String season) {
-            this.season = season;
-            return this;
-        }
-
-        public Builder meansOfTravel(List<String> meansOfTravel) {
-            this.meansOfTravel = meansOfTravel;
-            return this;
-        }
-
-        public Builder travelPurpose(List<String> travelPurpose) {
-            this.travelPurpose = travelPurpose;
-            return this;
-        }
-
-        public Builder destinationContinent(List<String> destinationContinent) {
-            this.destinationContinent = destinationContinent;
-            return this;
         }
 
         public QuestionerAnswers build() {

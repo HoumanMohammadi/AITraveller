@@ -5,6 +5,10 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UserWithoutUserDetails {
     String id;
+    String firstName;
+    String lastName;
+    String email;
+    String role;
 
     public String getId() {
         return id;
@@ -22,13 +26,9 @@ public class UserWithoutUserDetails {
         return email;
     }
 
-
     public String getRole() {
         return role;
     }
-
-    String firstName;
-    String lastName;
-    String email;
-    String role;
 }
+
+
