@@ -1,9 +1,6 @@
 package de.iav.frontend.service;
 
-import de.iav.frontend.controller.QuestionerPageOneController;
-import de.iav.frontend.controller.QuestionerPageThreeController;
-import de.iav.frontend.controller.QuestionerPageTwoController;
-import de.iav.frontend.controller.UserHomeController;
+import de.iav.frontend.controller.*;
 import de.iav.frontend.model.QuestionerAnswers;
 import de.iav.frontend.model.User;
 import javafx.event.ActionEvent;
@@ -77,6 +74,21 @@ public class SceneSwitchService {
         stage.show();
     }
 
+    public void switchToUserHome(ActionEvent event, User user) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/iav/frontend/userHome.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        UserHomeController userHomeController = loader.getController();
+        userHomeController.setUserForHome(user);
+
+        Scene scene = new Scene(root);
+        stage.setTitle("UserHome");
+        stage.setScene(scene);
+
+        stage.show();
+    }
+
     public void switchToQuestionerPageThree(ActionEvent event, QuestionerAnswers.Builder questionerBuilder) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/iav/frontend/QuestionerPageThree.fxml"));
@@ -96,16 +108,16 @@ public class SceneSwitchService {
 
     }
 
-    public void switchToUserHome(ActionEvent event, User user) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/iav/frontend/userHome.fxml"));
+    public void switchToAIResponse(ActionEvent event, QuestionerAnswers.Builder questionerBuilder) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/iav/frontend/AIResponse.fxml"));
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        UserHomeController userHomeController = loader.getController();
-        userHomeController.setUserForHome(user);
+        AIResponseController aiResponseController = loader.getController();
+        aiResponseController.setQuestionerBuilder(questionerBuilder);
 
         Scene scene = new Scene(root);
-        stage.setTitle("UserHome");
+        stage.setTitle("AI Response");
         stage.setScene(scene);
 
         stage.show();

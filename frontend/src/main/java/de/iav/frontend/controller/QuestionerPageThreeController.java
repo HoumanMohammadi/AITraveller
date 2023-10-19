@@ -119,8 +119,9 @@ public class QuestionerPageThreeController {
         System.out.println(questionerBuilder.toString());
     }
 
-    public void sendPreferenceToBackend(ActionEvent event) {
+    public void sendPreferenceToBackend(ActionEvent event) throws IOException {
         setQuestionerBuilder(questionerBuilder);
         getSuggestionService.getSuggestion(questionerBuilder.build());
+        sceneSwitchService.switchToAIResponse(event, questionerBuilder);
     }
 }
