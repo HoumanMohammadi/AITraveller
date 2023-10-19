@@ -2,6 +2,7 @@ package de.iav.frontend.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.iav.frontend.model.ChatGPTResponse;
 import de.iav.frontend.model.QuestionerAnswers;
 
 import java.net.URI;
@@ -27,7 +28,7 @@ public class GetSuggestionService {
         return instance;
     }
 
-    public void getSuggestion(QuestionerAnswers questionerBuilder) {
+    public ChatGPTResponse getSuggestion(QuestionerAnswers questionerBuilder) {
         try {
 
             String requestBody = objectMapper.writeValueAsString(questionerBuilder); // build() to get a QuestionerAnswers instance
@@ -40,20 +41,24 @@ public class GetSuggestionService {
             System.out.println("send Builder to backend. Builder:"+ questionerBuilder);
             System.out.println("request body:   "+requestBody);
 
-            httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+            System.out.println(httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                    .thenApply(HttpResponse::body)
+                    .thenApply(this::mapToQuestionerBuilder)
+                    .join());
+
+            return httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                     .thenApply(HttpResponse::body)
                     .thenApply(this::mapToQuestionerBuilder)
                     .join();
-            System.out.println("httpclient........."+httpClient);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private QuestionerAnswers mapToQuestionerBuilder(String responseBody) {
+    private ChatGPTResponse mapToQuestionerBuilder(String responseBody) {
         try {
             System.out.println("objectMapper  " + responseBody);
-            return objectMapper.readValue(responseBody, QuestionerAnswers.class);
+            return objectMapper.readValue(responseBody, ChatGPTResponse.class);
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Failed to map preference", e);
         }

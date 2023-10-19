@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 public class ChatGPTAPIController {
 
     private final ChatGPTService chatGPTService;
+
     //private final QuestionerAnswers.Builder questionerBuilder;
 
 

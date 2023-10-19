@@ -1,9 +1,6 @@
 package de.iav.frontend.service;
 
-import de.iav.frontend.controller.QuestionerPageOneController;
-import de.iav.frontend.controller.QuestionerPageThreeController;
-import de.iav.frontend.controller.QuestionerPageTwoController;
-import de.iav.frontend.controller.UserHomeController;
+import de.iav.frontend.controller.*;
 import de.iav.frontend.model.QuestionerAnswers;
 import de.iav.frontend.model.User;
 import javafx.event.ActionEvent;
@@ -77,25 +74,6 @@ public class SceneSwitchService {
         stage.show();
     }
 
-    public void switchToQuestionerPageThree(ActionEvent event, QuestionerAnswers.Builder questionerBuilder) throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/iav/frontend/QuestionerPageThree.fxml"));
-        System.out.println("debugger   "+questionerBuilder.toString());
-        Parent root = loader.load();
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        QuestionerPageThreeController controllerThree = loader.getController();
-        controllerThree.setQuestionerBuilder(questionerBuilder);
-        //controllerThree.initializeTravelDurationBox();
-
-        Scene scene = new Scene(root);
-        stage.setTitle("Questioner3");
-        stage.setScene(scene);
-
-        stage.show();
-
-    }
-
     public void switchToUserHome(ActionEvent event, User user) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/iav/frontend/userHome.fxml"));
         Parent root = loader.load();
@@ -110,4 +88,51 @@ public class SceneSwitchService {
 
         stage.show();
     }
+
+    public void switchToQuestionerPageThree(ActionEvent event, QuestionerAnswers.Builder questionerBuilder) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/iav/frontend/QuestionerPageThree.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        QuestionerPageThreeController controllerThree = loader.getController();
+        controllerThree.setQuestionerBuilder(questionerBuilder);
+
+        Scene scene = new Scene(root);
+        stage.setTitle("Questioner3");
+        stage.setScene(scene);
+
+        stage.show();
+    }
+    public void switchToQuestionerPageThreeFromAIController(ActionEvent event, QuestionerAnswers.Builder questionerBuilder, AIResponseController aiResponseController) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/iav/frontend/QuestionerPageThree.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        QuestionerPageThreeController controllerThree = loader.getController();
+        controllerThree.setQuestionerBuilder(questionerBuilder);
+
+        Scene scene = new Scene(root);
+        stage.setTitle("Questioner3");
+        stage.setScene(scene);
+
+        stage.show();
+    }
+
+
+    public void switchToAIResponse(ActionEvent event, QuestionerAnswers.Builder questionerBuilder) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/iav/frontend/AIResponse.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        AIResponseController aiController = loader.getController();
+        aiController.setQuestionerBuilder(questionerBuilder);
+
+
+        Scene scene = new Scene(root);
+        stage.setTitle("AI Response");
+        stage.setScene(scene);
+
+        stage.show();
+    }
+
 }

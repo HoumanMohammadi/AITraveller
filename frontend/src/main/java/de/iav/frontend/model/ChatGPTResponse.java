@@ -5,6 +5,6 @@ import java.util.List;
 public record ChatGPTResponse(
         String id,
         String model,
-        List<Choice>choices
+        List<Choices>choices
 ) {
 }
