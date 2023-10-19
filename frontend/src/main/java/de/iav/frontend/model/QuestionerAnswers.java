@@ -1,19 +1,23 @@
 package de.iav.frontend.model;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.List;
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class QuestionerAnswers {
-    private final String age;
-    private final List<String> coTraveller;
-    private final String livingCity;
-    private final boolean disability;
-    private final String travelDuration;
-    private final List<String> activity;
-    private final String season;
-    private final List<String> meansOfTravel;
-    private final List<String> travelPurpose;
-    private final List<String> destinationContinent;
-    private final String preferredDestination;
+    private  int age;
+    private  List<String> coTraveller;
+    private  String livingCity;
+    private  boolean disability;
+    private  String travelDuration;
+    private  List<String> activity;
+    private  String season;
+    private  List<String> meansOfTravel;
+    private  List<String> travelPurpose;
+    private  List<String> destinationContinent;
+    private  String preferredDestination;
+    public QuestionerAnswers() {
+    }
 
     private QuestionerAnswers(Builder builder, String preferredDestination) {
         this.age = builder.age;
@@ -29,7 +33,7 @@ public class QuestionerAnswers {
         this.preferredDestination = preferredDestination;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
@@ -73,7 +77,7 @@ public class QuestionerAnswers {
         return destinationContinent;
     }
 
-    public String age() {
+    public int age() {
         return age;
     }
 
@@ -112,9 +116,8 @@ public class QuestionerAnswers {
     public List<String> destinationContinent() {
         return destinationContinent;
     }
-
     public static class Builder {
-        private String age;
+        private int age;
         public List<String> coTraveller;
         private  String livingCity;
         private  boolean disability;
@@ -126,6 +129,8 @@ public class QuestionerAnswers {
         private List<String> travelPurpose;
         private List<String> destinationContinent;
 
+        public Builder() {
+        }
 
         @Override
         public String toString() {
@@ -144,7 +149,8 @@ public class QuestionerAnswers {
                     '}';
         }
 
-        public Builder(String age, List<String> coTraveller, String livingCity, boolean disability, String travelDuration, List<String> activity, String season, String preferredDestination, List<String> meansOfTravel, List<String> travelPurpose, List<String> destinationContinent) {
+
+        public Builder(int age, List<String> coTraveller, String livingCity, boolean disability, String travelDuration, List<String> activity, String season, String preferredDestination, List<String> meansOfTravel, List<String> travelPurpose, List<String> destinationContinent) {
             this.age = age;
             this.coTraveller = coTraveller;
             this.livingCity = livingCity;
@@ -190,7 +196,7 @@ public class QuestionerAnswers {
             return this;
         }
 
-        public Builder age(String age){
+        public Builder age(int age){
             this.age=age;
             return this;
         }

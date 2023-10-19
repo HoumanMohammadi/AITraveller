@@ -17,6 +17,8 @@ public class TransformQuestionerToText {
             message += "I am in good shape. ";
         }
         message += "I want to travel for " + answers.getTravelDuration() + " . ";
+        message += "I want to travel with " + answers.getMeansOfTravel() + " . ";
+
 
         // Check if there are any activities
         if (!answers.getActivity().isEmpty()) {

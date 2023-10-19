@@ -17,9 +17,9 @@ public class ChatGPTAPIController {
 
 
     @PostMapping("/questionAnswers")
-    public ChatGPTResponse getQuestionAnswers(@RequestBody QuestionerAnswers.Builder questionerBuilder) throws Exception {
+    public ChatGPTResponse getQuestionAnswers(@RequestBody QuestionerAnswers questionerBuilder) throws Exception {
         System.out.println("questionerBuilder.toString()"+questionerBuilder.toString());
-        System.out.println(questionerBuilder.build().getCoTraveller());
+        System.out.println(questionerBuilder.getCoTraveller());
         return chatGPTService.getChatSuggestion(questionerBuilder);
         //return questionerBuilder.toString();
     }

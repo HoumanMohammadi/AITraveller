@@ -51,7 +51,7 @@ public class QuestionerPageOneController {
     private CheckBox mobilityNoCheckbox;
     private final SceneSwitchService sceneSwitchService= SceneSwitchService.getInstance();
     @FXML
-    private QuestionerAnswers.Builder questionerBuilder = new QuestionerAnswers.Builder("", new ArrayList<>(), "", false, "", new ArrayList<>(), "", "", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+    private QuestionerAnswers.Builder questionerBuilder = new QuestionerAnswers.Builder(20, new ArrayList<>(), "", false, "", new ArrayList<>(), "", "", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
     private final List<String> coTraveller = new ArrayList<>();
 
 
@@ -88,7 +88,7 @@ public class QuestionerPageOneController {
 
     public void setQuestionerBuilder(QuestionerAnswers.Builder questionerBuilder) {
         if (questionerBuilder== null){
-            questionerBuilder = new QuestionerAnswers.Builder("", new ArrayList<>(), "", false, "", new ArrayList<>(), "", "", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+            questionerBuilder = new QuestionerAnswers.Builder(20, new ArrayList<>(), "", false, "", new ArrayList<>(), "", "", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
         }
         else
@@ -122,8 +122,23 @@ public class QuestionerPageOneController {
             System.out.println("No disability selected.");
         }
     }
+   /* ("16 to 20", "20 to 30", "30 to 40", "40 to 50", "50 to 70", "over 70");
+            ageChoiceBox.setValue("--SELECT--");*/
 
     public void handleAgeChoiceBox(ActionEvent event) {
-        questionerBuilder.age(ageChoiceBox.getValue());
+        String ageChoice = ageChoiceBox.getValue();
+
+        switch (ageChoice) {
+            case "--SELECT--" -> questionerBuilder.age(22);
+            case "16 to 20" -> questionerBuilder.age(16);
+            case "20 to 30" -> questionerBuilder.age(25);
+            case "30 to 40" -> questionerBuilder.age(35);
+            case "40 to 50" -> questionerBuilder.age(45);
+            case "50 to 60" -> questionerBuilder.age(55);
+            case "60 to 70" -> questionerBuilder.age(65);
+            case "over 70" -> questionerBuilder.age(75);
+            default -> {
+            }
+        }
     }
 }

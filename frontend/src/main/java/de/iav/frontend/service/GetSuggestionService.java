@@ -27,35 +27,35 @@ public class GetSuggestionService {
         return instance;
     }
 
-    private String mapToString(Object object) {
-        try {
-            System.out.println("objectMapper  "+objectMapper.writeValueAsString(object));
-            return objectMapper.writeValueAsString(object);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("Failed to map preference", e);
-        }
-    }
-
-
-    public void getSuggestion(QuestionerAnswers questionerAnswers) {
+    public void getSuggestion(QuestionerAnswers questionerBuilder) {
         try {
 
-            String requestBody = objectMapper.writeValueAsString(questionerAnswers);
+            String requestBody = objectMapper.writeValueAsString(questionerBuilder); // build() to get a QuestionerAnswers instance
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("http://localhost:8080/api/questioner/questionAnswers"))
                     .header("Content-Type", "application/json")
                     .header("Accept", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .build();
-            System.out.println("send Builder to backend. Builder:"+ questionerAnswers);
+            System.out.println("send Builder to backend. Builder:"+ questionerBuilder);
             System.out.println("request body:   "+requestBody);
 
             httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                     .thenApply(HttpResponse::body)
-                    .thenApply(this::mapToString)
+                    .thenApply(this::mapToQuestionerBuilder)
                     .join();
+            System.out.println("httpclient........."+httpClient);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private QuestionerAnswers mapToQuestionerBuilder(String responseBody) {
+        try {
+            System.out.println("objectMapper  " + responseBody);
+            return objectMapper.readValue(responseBody, QuestionerAnswers.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Failed to map preference", e);
         }
     }
 }
