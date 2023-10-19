@@ -1,5 +1,6 @@
 package de.iav.frontend.controller;
 
+import de.iav.frontend.model.ChatGPTResponse;
 import de.iav.frontend.model.QuestionerAnswers;
 import de.iav.frontend.service.GetSuggestionService;
 import de.iav.frontend.service.SceneSwitchService;
@@ -15,6 +16,8 @@ import java.util.List;
 
 public class QuestionerPageThreeController {
     private final SceneSwitchService sceneSwitchService= SceneSwitchService.getInstance();
+
+    private AIResponseController aiResponseController;
     public CheckBox europeCheckbox;
     @FXML
     public CheckBox northAmericaCheckbox;
@@ -48,6 +51,10 @@ public class QuestionerPageThreeController {
     public TextField preferredDestinationTextField;
 
     private  QuestionerAnswers.Builder questionerBuilder;
+    @FXML
+    private QuestionerAnswers questionerAnswers;
+
+
     private final GetSuggestionService getSuggestionService = GetSuggestionService.getInstance();
 
     public void setQuestionerBuilder(QuestionerAnswers.Builder questionerBuilder) {
@@ -101,6 +108,9 @@ public class QuestionerPageThreeController {
         questionerBuilder = questionerBuilder.travelPurpose(mood);
         System.out.println(questionerBuilder.toString());
     }
+    public void setAIResponseController(AIResponseController aiResponseController) {
+        this.aiResponseController = aiResponseController;
+    }
     @FXML
     private void handleContinentCheckboxAction() {
         List<String> travelContinent = new ArrayList<>();
@@ -121,7 +131,6 @@ public class QuestionerPageThreeController {
 
     public void sendPreferenceToBackend(ActionEvent event) throws IOException {
         setQuestionerBuilder(questionerBuilder);
-        getSuggestionService.getSuggestion(questionerBuilder.build());
         sceneSwitchService.switchToAIResponse(event, questionerBuilder);
     }
 }

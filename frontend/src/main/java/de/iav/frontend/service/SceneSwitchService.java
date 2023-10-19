@@ -90,31 +90,43 @@ public class SceneSwitchService {
     }
 
     public void switchToQuestionerPageThree(ActionEvent event, QuestionerAnswers.Builder questionerBuilder) throws IOException {
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/iav/frontend/QuestionerPageThree.fxml"));
-        System.out.println("debugger   "+questionerBuilder.toString());
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         QuestionerPageThreeController controllerThree = loader.getController();
         controllerThree.setQuestionerBuilder(questionerBuilder);
-        //controllerThree.initializeTravelDurationBox();
 
         Scene scene = new Scene(root);
         stage.setTitle("Questioner3");
         stage.setScene(scene);
 
         stage.show();
-
     }
+    public void switchToQuestionerPageThreeFromAIController(ActionEvent event, QuestionerAnswers.Builder questionerBuilder, AIResponseController aiResponseController) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/iav/frontend/QuestionerPageThree.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        QuestionerPageThreeController controllerThree = loader.getController();
+        controllerThree.setQuestionerBuilder(questionerBuilder);
+
+        Scene scene = new Scene(root);
+        stage.setTitle("Questioner3");
+        stage.setScene(scene);
+
+        stage.show();
+    }
+
 
     public void switchToAIResponse(ActionEvent event, QuestionerAnswers.Builder questionerBuilder) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/iav/frontend/AIResponse.fxml"));
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        AIResponseController aiResponseController = loader.getController();
-        aiResponseController.setQuestionerBuilder(questionerBuilder);
+        AIResponseController aiController = loader.getController();
+        aiController.setQuestionerBuilder(questionerBuilder);
+
 
         Scene scene = new Scene(root);
         stage.setTitle("AI Response");
@@ -122,4 +134,5 @@ public class SceneSwitchService {
 
         stage.show();
     }
+
 }
