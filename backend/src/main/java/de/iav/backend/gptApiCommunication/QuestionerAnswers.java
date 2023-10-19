@@ -1,8 +1,10 @@
 package de.iav.backend.gptApiCommunication;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class QuestionerAnswers {
     private int age;
     private List<String> coTraveller;
@@ -15,6 +17,14 @@ public class QuestionerAnswers {
     private List<String> travelPurpose;
     private List<String> destinationContinent;
     private String preferredDestination;
+
+    public List<String> getMeansOfTravel() {
+        return meansOfTravel;
+    }
+
+    public List<String> getDestinationContinent() {
+        return destinationContinent;
+    }
 
     public QuestionerAnswers(Builder builder, String preferredDestination) {
         this.age = builder.age;
@@ -77,15 +87,31 @@ public class QuestionerAnswers {
     public static class Builder {
         private int age;
         public List<String> coTraveller;
-        private  String livingCity;
+        private String livingCity;
         private  boolean disability;
-        private String travelDuration;
-        private List<String> activity;
-        private String season;
-        private String preferredDestination;
-        private List<String> meansOfTravel;
-        private List<String> travelPurpose;
-        private List<String> destinationContinent;
+        private  String travelDuration;
+        private  List<String> activity;
+        private  String season;
+        private  String preferredDestination;
+        private  List<String> meansOfTravel;
+        private  List<String> travelPurpose;
+        private  List<String> destinationContinent;
+
+        public Builder() {
+        }
+
+        public Builder(int age, String livingCity, boolean disability, String travelDuration, List<String> activity, String season, String preferredDestination, List<String> meansOfTravel, List<String> travelPurpose, List<String> destinationContinent) {
+            this.age = age;
+            this.livingCity = livingCity;
+            this.disability = disability;
+            this.travelDuration = travelDuration;
+            this.activity = activity;
+            this.season = season;
+            this.preferredDestination = preferredDestination;
+            this.meansOfTravel = meansOfTravel;
+            this.travelPurpose = travelPurpose;
+            this.destinationContinent = destinationContinent;
+        }
 
 
         @Override

@@ -21,10 +21,10 @@ public class ChatGPTService {
     private final Gson gson;
     private final ChatGPTAPIRequest chatGPTAPIRequest;
     private final TransformQuestionerToText transformQuestionerToText;
-    public ChatGPTResponse getChatSuggestion(QuestionerAnswers.Builder questionerBuilder) {
+    public ChatGPTResponse getChatSuggestion(QuestionerAnswers questionerBuilder) {
         Message messages= new Message();
         messages.role="user";
-        messages.content= transformQuestionerToText.transform(questionerBuilder.build());
+        messages.content= transformQuestionerToText.transform(questionerBuilder);
         List<Message> messagesList=new ArrayList<>();
         messagesList.add(messages);
         System.out.println("message list: "+ messagesList.toString());
