@@ -3,12 +3,14 @@ package de.iav.frontend.controller;
 import de.iav.frontend.model.*;
 import de.iav.frontend.service.GetSuggestionService;
 import de.iav.frontend.service.SceneSwitchService;
+import de.iav.frontend.service.TravelService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class AIResponseController {
@@ -19,10 +21,20 @@ public class AIResponseController {
     private ScrollPane scrollPane;
     @FXML
     private User user;
+    public String content;
     private  QuestionerAnswers.Builder questionerBuilder;
+    private TravelService travelService;
     private final GetSuggestionService getSuggestionService = GetSuggestionService.getInstance();
 
     private final SceneSwitchService sceneSwitchService= SceneSwitchService.getInstance();
+    User sampleUser = new User(
+            "12345",
+            "John",
+            "Doe",
+            "john.doe@example.com",
+            "user"
+    );
+
 
 
 
@@ -43,7 +55,8 @@ public class AIResponseController {
     }
 
     public void switchToMainPage(ActionEvent event) throws IOException {
-        sceneSwitchService.switchToUserHome(event,user);
+        sceneSwitchService.switchToUserHome(event,sampleUser);
+        travelService.createNewTravel(new NewTravelDTO(content, sampleUser, LocalDateTime.now(), questionerBuilder.build()));
     }
 
     public void receiveResponse(ChatGPTResponse response) {
@@ -54,7 +67,7 @@ public class AIResponseController {
         for (Choices choice : choices) {
             Message message = choice.message();
             if (message != null) {
-                String content = message.content();
+                content = message.content();
                 System.out.println("Content: " + content);
                 label.setText(content);
             }

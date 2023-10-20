@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<?import javafx.scene.control.Label?>
-<AnchorPane prefHeight="400.0" prefWidth="268.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.iav.frontend.controller.AIResponseController">
-   <AnchorPane prefHeight="487.0" prefWidth="396.0">
-      <Button layoutX="252.0" layoutY="410.0" mnemonicParsing="false" onAction="#switchToPageThree" prefHeight="38.0" prefWidth="100.0" text="Next" />
-      <Button layoutX="47.0" layoutY="410.0" mnemonicParsing="false" onAction="#switchToMainPage" prefHeight="38.0" prefWidth="100.0" text="Back" />
-      <ScrollPane fx:id="scrollPane" layoutX="-3.0" prefHeight="392.0" prefWidth="402.0">
-         <Label fx:id="label" />
-         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0"/>
+<AnchorPane prefHeight="400.0" prefWidth="400.0" stylesheets="@CssStyle/suggestion.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.iav.frontend.controller.AIResponseController">
+   <AnchorPane prefHeight="487.0" prefWidth="657.0">
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="7.0" layoutY="8.0" prefHeight="384.0" prefWidth="643.0" styleClass="scroll-pane">
+         <Label fx:id="label" wrapText="true" />
+         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+         <styleClass>
+            <String fx:value="scroll-pane" />
+            <String fx:value="label" />
+         </styleClass>
       </ScrollPane>
+      <Button layoutX="374.0" layoutY="410.0" mnemonicParsing="false" onAction="#switchToMainPage" prefHeight="38.0" prefWidth="187.0" text="Add Travel to my Wish list!" />
+      <Button layoutX="81.0" layoutY="410.0" mnemonicParsing="false" onAction="#switchToPageThree" prefHeight="38.0" prefWidth="187.0" text="Back" />
 
    </AnchorPane>
 </AnchorPane>

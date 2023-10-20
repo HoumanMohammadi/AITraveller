@@ -1,0 +1,9 @@
+.root {
+    -fx-background-image: url("../image/suggestion.jpg");
+    -fx-background-size: cover;
+    -fx-background-color: rgba(0, 0, 0, 0.3); /* Adjust the opacity (0.5 in this example) */
+}
+.scroll-pane {
+    -fx-background-color: transparent; /* Set the ScrollPane background to transparent */
+
+}

@@ -1,0 +1,12 @@
+.root {
+    -fx-background-image: url("../image/appinterface.png");
+    -fx-background-size: cover;
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* Adjust the opacity (0.5 in this example) */
+}
+.overlay {
+    -fx-text-fill: white; /* Text color */
+
+    -fx-background-color: rgba(0, 0, 0, 0.1); /* Black overlay with 50% opacity */
+    -fx-background-radius: 5px; /* Optional: rounded corners for the overlay */
+}
+
